@@ -1,0 +1,12 @@
+{
+    "zoom": 1,
+    "spawnPoint": [400, 0],
+    "objects": [
+        {
+            "objName": "platform",
+            "path": "grd",
+            "position": [2000, 64],
+            "scale": [1, 1]
+        }
+    ]
+}

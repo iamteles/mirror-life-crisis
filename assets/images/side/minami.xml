@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="minami.png">
+	<!-- Created with Adobe Animate version 20.0.0.17400 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Minami Sprint0000" x="34" y="34" width="186" height="283"/>
+	<SubTexture name="Minami Sprint0001" x="34" y="34" width="186" height="283"/>
+	<SubTexture name="Minami Sprint0002" x="34" y="34" width="186" height="283"/>
+	<SubTexture name="Minami Sprint0003" x="236" y="628" width="185" height="276" frameX="0" frameY="-6" frameWidth="186" frameHeight="283"/>
+	<SubTexture name="Minami Sprint0004" x="236" y="628" width="185" height="276" frameX="0" frameY="-6" frameWidth="186" frameHeight="283"/>
+	<SubTexture name="Minami Sprint0005" x="236" y="628" width="185" height="276" frameX="0" frameY="-6" frameWidth="186" frameHeight="283"/>
+	<SubTexture name="Minami Sprint0006" x="238" y="34" width="184" height="283" frameX="0" frameY="0" frameWidth="186" frameHeight="283"/>
+	<SubTexture name="Minami Sprint0007" x="238" y="34" width="184" height="283" frameX="0" frameY="0" frameWidth="186" frameHeight="283"/>
+	<SubTexture name="Minami Sprint0008" x="238" y="34" width="184" height="283" frameX="0" frameY="0" frameWidth="186" frameHeight="283"/>
+	<SubTexture name="Minami Sprint0009" x="439" y="632" width="185" height="276" frameX="0" frameY="-7" frameWidth="186" frameHeight="283"/>
+	<SubTexture name="Minami Sprint0010" x="439" y="632" width="185" height="276" frameX="0" frameY="-7" frameWidth="186" frameHeight="283"/>
+	<SubTexture name="Minami Sprint0011" x="439" y="632" width="185" height="276" frameX="0" frameY="-7" frameWidth="186" frameHeight="283"/>
+	<SubTexture name="Minami Stand0000" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0001" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0002" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0003" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0004" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0005" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0006" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0007" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0008" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0009" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0010" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0011" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0012" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0013" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0014" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0015" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0016" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0017" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0018" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0019" x="643" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0020" x="643" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0021" x="440" y="333" width="185" height="281"/>
+	<SubTexture name="Minami Stand0022" x="440" y="333" width="185" height="281"/>
+	<SubTexture name="Minami Stand0023" x="643" y="333" width="185" height="281"/>
+	<SubTexture name="Minami Stand0024" x="643" y="333" width="185" height="281"/>
+	<SubTexture name="Minami Stand0025" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0026" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0027" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0028" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0029" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0030" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0031" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0032" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0033" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0034" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0035" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0036" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0037" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0038" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0039" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0040" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0041" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0042" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0043" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0044" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Stand0045" x="440" y="34" width="185" height="281"/>
+	<SubTexture name="Minami Walk0000" x="642" y="632" width="186" height="274" frameX="0" frameY="-7" frameWidth="186" frameHeight="282"/>
+	<SubTexture name="Minami Walk0001" x="642" y="632" width="186" height="274" frameX="0" frameY="-7" frameWidth="186" frameHeight="282"/>
+	<SubTexture name="Minami Walk0002" x="642" y="632" width="186" height="274" frameX="0" frameY="-7" frameWidth="186" frameHeight="282"/>
+	<SubTexture name="Minami Walk0003" x="642" y="632" width="186" height="274" frameX="0" frameY="-7" frameWidth="186" frameHeight="282"/>
+	<SubTexture name="Minami Walk0004" x="34" y="335" width="184" height="282" frameX="-1" frameY="0" frameWidth="186" frameHeight="282"/>
+	<SubTexture name="Minami Walk0005" x="34" y="335" width="184" height="282" frameX="-1" frameY="0" frameWidth="186" frameHeight="282"/>
+	<SubTexture name="Minami Walk0006" x="34" y="335" width="184" height="282" frameX="-1" frameY="0" frameWidth="186" frameHeight="282"/>
+	<SubTexture name="Minami Walk0007" x="34" y="335" width="184" height="282" frameX="-1" frameY="0" frameWidth="186" frameHeight="282"/>
+	<SubTexture name="Minami Walk0008" x="236" y="335" width="186" height="275" frameX="0" frameY="-7" frameWidth="186" frameHeight="282"/>
+	<SubTexture name="Minami Walk0009" x="236" y="335" width="186" height="275" frameX="0" frameY="-7" frameWidth="186" frameHeight="282"/>
+	<SubTexture name="Minami Walk0010" x="236" y="335" width="186" height="275" frameX="0" frameY="-7" frameWidth="186" frameHeight="282"/>
+	<SubTexture name="Minami Walk0011" x="236" y="335" width="186" height="275" frameX="0" frameY="-7" frameWidth="186" frameHeight="282"/>
+	<SubTexture name="Minami Walk0012" x="34" y="335" width="184" height="282" frameX="-1" frameY="0" frameWidth="186" frameHeight="282"/>
+	<SubTexture name="Minami Walk0013" x="34" y="335" width="184" height="282" frameX="-1" frameY="0" frameWidth="186" frameHeight="282"/>
+	<SubTexture name="Minami Walk0014" x="34" y="335" width="184" height="282" frameX="-1" frameY="0" frameWidth="186" frameHeight="282"/>
+	<SubTexture name="Minami Walk0015" x="34" y="335" width="184" height="282" frameX="-1" frameY="0" frameWidth="186" frameHeight="282"/>
+</TextureAtlas>
