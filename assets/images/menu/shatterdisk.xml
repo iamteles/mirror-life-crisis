@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="shatterdisk.png">
+	<!-- Created with Adobe Animate version 20.0.0.17400 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Shatterdisk logo0000" x="1253" y="217" width="592" height="156" frameX="0" frameY="-21" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0001" x="1253" y="217" width="592" height="156" frameX="0" frameY="-21" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0002" x="1231" y="391" width="589" height="148" frameX="-1" frameY="-28" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0003" x="1231" y="391" width="589" height="148" frameX="-1" frameY="-28" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0004" x="34" y="570" width="571" height="122" frameX="-11" frameY="-37" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0005" x="34" y="570" width="571" height="122" frameX="-11" frameY="-37" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0006" x="1168" y="832" width="535" height="104" frameX="-28" frameY="-48" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0007" x="1168" y="832" width="535" height="104" frameX="-28" frameY="-48" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0008" x="623" y="570" width="533" height="99" frameX="-29" frameY="-51" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0009" x="623" y="570" width="533" height="99" frameX="-29" frameY="-51" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0010" x="1193" y="697" width="533" height="98" frameX="-29" frameY="-52" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0011" x="1193" y="697" width="533" height="98" frameX="-29" frameY="-52" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0012" x="34" y="843" width="539" height="104" frameX="-23" frameY="-52" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0013" x="34" y="843" width="539" height="104" frameX="-23" frameY="-52" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0014" x="34" y="710" width="561" height="115" frameX="-1" frameY="-52" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0015" x="34" y="710" width="561" height="115" frameX="-1" frameY="-52" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0016" x="1193" y="697" width="533" height="98" frameX="-1" frameY="-52" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0017" x="613" y="832" width="537" height="117" frameX="-29" frameY="-33" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0018" x="613" y="832" width="537" height="117" frameX="-29" frameY="-33" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0019" x="614" y="413" width="543" height="139" frameX="-29" frameY="-11" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0020" x="614" y="413" width="543" height="139" frameX="-29" frameY="-11" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0021" x="1193" y="697" width="533" height="98" frameX="-29" frameY="-11" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0022" x="1175" y="557" width="590" height="122" frameX="-29" frameY="-52" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0023" x="1175" y="557" width="590" height="122" frameX="-29" frameY="-52" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0024" x="34" y="249" width="619" height="146" frameX="-29" frameY="-52" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0025" x="34" y="249" width="619" height="146" frameX="-29" frameY="-52" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0026" x="1193" y="697" width="533" height="98" frameX="-29" frameY="-52" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0027" x="623" y="697" width="552" height="117" frameX="-10" frameY="-33" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0028" x="623" y="697" width="552" height="117" frameX="-10" frameY="-33" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0029" x="34" y="413" width="562" height="135" frameX="0" frameY="-15" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0030" x="34" y="413" width="562" height="135" frameX="0" frameY="-15" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0031" x="1193" y="697" width="533" height="98" frameX="0" frameY="-15" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0032" x="1193" y="697" width="533" height="98" frameX="-29" frameY="-52" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0033" x="671" y="229" width="542" height="163" frameX="-27" frameY="-17" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0034" x="662" y="34" width="573" height="177" frameX="-10" frameY="-9" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0035" x="662" y="34" width="573" height="177" frameX="-10" frameY="-9" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0036" x="34" y="34" width="610" height="197" frameX="-2" frameY="0" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0037" x="34" y="34" width="610" height="197" frameX="-2" frameY="0" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0038" x="34" y="34" width="610" height="197" frameX="-2" frameY="0" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0039" x="1253" y="34" width="612" height="165" frameX="-1" frameY="-17" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0040" x="1253" y="34" width="612" height="165" frameX="-1" frameY="-17" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0041" x="1253" y="34" width="612" height="165" frameX="-1" frameY="-17" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0042" x="1253" y="34" width="612" height="165" frameX="-1" frameY="-17" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0043" x="591" y="843" width="1" height="1" frameX="-324" frameY="-99" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0044" x="591" y="843" width="1" height="1" frameX="-324" frameY="-99" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0045" x="1253" y="34" width="612" height="165" frameX="-1" frameY="-17" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0046" x="1253" y="34" width="612" height="165" frameX="-1" frameY="-17" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0047" x="591" y="862" width="1" height="1" frameX="-324" frameY="-99" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0048" x="591" y="862" width="1" height="1" frameX="-324" frameY="-99" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0049" x="1253" y="34" width="612" height="165" frameX="-1" frameY="-17" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0050" x="1253" y="34" width="612" height="165" frameX="-1" frameY="-17" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0051" x="591" y="881" width="1" height="1" frameX="-324" frameY="-99" frameWidth="648" frameHeight="198"/>
+	<SubTexture name="Shatterdisk logo0052" x="591" y="881" width="1" height="1" frameX="-324" frameY="-99" frameWidth="648" frameHeight="198"/>
+</TextureAtlas>

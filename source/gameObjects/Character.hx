@@ -63,25 +63,53 @@ class Character extends FlxSprite
 				globalOffset.x = -300;
 				cameraOffset.y = -180;
 
-			case "bf-pixel":
-				frames = Paths.getSparrowAtlas("characters/bf-pixel/bfPixel");
+			case "minami":
+				frames = Paths.getSparrowAtlas("characters/minami/Minami");
 
-				animation.addByPrefix('idle', 'BF IDLE', 24, false);
-				animation.addByPrefix('singUP', 'BF UP NOTE', 24, false);
-				animation.addByPrefix('singLEFT', 'BF LEFT NOTE', 24, false);
-				animation.addByPrefix('singRIGHT', 'BF RIGHT NOTE', 24, false);
-				animation.addByPrefix('singDOWN', 'BF DOWN NOTE', 24, false);
-				animation.addByPrefix('singUPmiss', 'BF UP MISS', 24, false);
-				animation.addByPrefix('singLEFTmiss', 'BF LEFT MISS', 24, false);
-				animation.addByPrefix('singRIGHTmiss', 'BF RIGHT MISS', 24, false);
-				animation.addByPrefix('singDOWNmiss', 'BF DOWN MISS', 24, false);
+				animation.addByPrefix('idle', 		'Minami Idle', 24, true);
+				animation.addByPrefix('singLEFT', 	'Minami Left', 24, false);
+				animation.addByPrefix('singDOWN', 	'Minami Down', 24, false);
+				animation.addByPrefix('singUP', 	'Minami Up', 24, false);
+				animation.addByPrefix('singRIGHT', 	'Minami Right', 24, false);
+
+				addOffset('idle', -35, 270);
+				addOffset('singLEFT', 84, 274);
+				addOffset('singDOWN', -89, 130);
+				addOffset('singUP', -7, 280);
+				addOffset('singRIGHT', -132, 204);
 
 				playAnim('idle');
 
 				flipX = true;
-				antialiasing = false;
-				scale.set(6,6);
 
+				globalOffset.x = -740;
+				globalOffset.y = 320;
+				cameraOffset.x = -320;
+				cameraOffset.y = -150;
+			
+			case "clownami":
+				frames = Paths.getSparrowAtlas("characters/clown/Clownami");
+
+				animation.addByPrefix('idle', 		'Clownami Idle', 24, true);
+				animation.addByPrefix('singLEFT', 	'Clownami Left', 24, false);
+				animation.addByPrefix('singDOWN', 	'Clownami Down', 24, false);
+				animation.addByPrefix('singUP', 	'Clownami Up', 24, false);
+				animation.addByPrefix('singRIGHT', 	'Clownami Right', 24, false);
+				animation.addByPrefix('bow', 		'Clownami Bow', 24, false);
+
+				addOffset('idle', -1362, 24);
+				addOffset('singLEFT', -1170, -55);
+				addOffset('singDOWN', -1245, -106);
+				addOffset('singUP', -1360, 31);
+				addOffset('singRIGHT', -1399, 11);
+				addOffset('bow', -1280, 23);
+
+				playAnim('idle');
+
+				globalOffset.x = -500;
+				globalOffset.y = 80;
+				cameraOffset.x = 910;
+				cameraOffset.y = 20;
 			case "bf":
 				frames = Paths.getSparrowAtlas("characters/bf/BOYFRIEND");
 

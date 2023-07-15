@@ -16,39 +16,40 @@ import states.*;
 
 class GameOverSubState extends MusicBeatSubState
 {
-	public var bf:Character;
-	public var bfFollow:FlxObject;
-
-	public function new(bf:Character)
+	var waitIsOver = false;
+	public var ended:Bool = false;
+	var sprite:FlxSprite;
+	public function new()
 	{
 		super();
-		this.bf = bf;
-		add(bf);
 
-		if(!bf.animation.exists("firstDeath")) {
-			bf.scale.set(1,1); bf.updateHitbox();
-			bf.reloadChar("bf", bf.isPlayer);
-		}
+		sprite = new FlxSprite();
+		sprite.frames = Paths.getSparrowAtlas("hud/base/gameover");
+		sprite.animation.addByPrefix('start', 		'gameover', 24, false);
+		sprite.animation.addByPrefix('idle', 		'gameover0136', 24, true);
+		sprite.animation.play('start');
+		sprite.scale.set(0.7, 0.7);
+		sprite.updateHitbox();
+		sprite.screenCenter();
+		sprite.x -= 70;
+		add(sprite);
 
+		FlxG.camera.follow(sprite, LOCKON, FlxG.elapsed * 1);
 
-		bf.playAnim("firstDeath");
-
-		bfFollow = new FlxObject(bf.x + bf.width / 2, bf.y + bf.height / 2);
-
-		new FlxTimer().start(0.4, function(tmr:FlxTimer)
+		var countTimer = new FlxTimer().start(4, function(tmr:FlxTimer)
 		{
-			FlxG.camera.follow(bfFollow, LOCKON, FlxG.elapsed * 1);
+			waitIsOver = true;
 		});
 	}
 
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
-		if(bf.animation.curAnim.name == "firstDeath"
-		&& bf.animation.curAnim.finished)
-			bf.playAnim("deathLoop");
 
-		if(!ended)
+		if(sprite.animation.curAnim.name == "start" && sprite.animation.curAnim.finished)
+			sprite.animation.play("idle");
+
+		if(!ended || waitIsOver)
 		{
 			if(Controls.justPressed("BACK"))
 			{
@@ -64,12 +65,9 @@ class GameOverSubState extends MusicBeatSubState
 		}
 	}
 
-	public var ended:Bool = false;
-
 	public function endBullshit()
 	{
 		ended = true;
-		bf.playAnim("deathConfirm");
 
 		new FlxTimer().start(1.0, function(tmr:FlxTimer)
 		{

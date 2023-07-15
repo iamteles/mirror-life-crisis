@@ -1,5 +1,6 @@
 {
     "zoom": 1,
+    "music": "all",
     "spawnPoint": [200, 200],
     "boundaries": [0, -1000, 1800, 4000],
     "camPos": [0, -200],

@@ -113,6 +113,8 @@ class PauseSubState extends MusicBeatSubState
 		curSelected += change;
 		curSelected = FlxMath.wrap(curSelected, 0, optionShit.length - 1);
 
+		FlxG.sound.play(Paths.sound("beep"));
+
 		for(item in optionsGrp)
 		{
 			item.focusY = item.ID - curSelected;

@@ -1,5 +1,6 @@
 package gameObjects.hud;
 
+import cpp.Stdio;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
@@ -15,35 +16,39 @@ class HudClass extends FlxGroup
 	public var infoTxt:FlxText;
 
 	// health bar
-	public var healthBarBG:FlxSprite;
-	public var healthBar:FlxBar;
+	public var healthBar:FlxSprite;
 
 	// icon stuff
 	public var iconBf:HealthIcon;
-	public var iconDad:HealthIcon;
+	var downscroll:Bool = false;
 
-	public function new()
+	public function new() 
 	{
 		super();
-		healthBarBG = new FlxSprite().loadGraphic(Paths.image("hud/base/healthBar"));
-		add(healthBarBG);
 
-		healthBar = new FlxBar(
-			0, 0,
-			RIGHT_TO_LEFT,
-			Math.floor(healthBarBG.width) - 8,
-			Math.floor(healthBarBG.height) - 8
-		);
-		healthBar.createFilledBar(0xFFFF0000, 0xFF00FF00);
-		healthBar.updateBar();
+		downscroll = SaveData.data.get("Downscroll");
+		healthBar = new FlxSprite();
+		healthBar.frames = Paths.getSparrowAtlas("hud/base/health_bar");
+		for (i in [0, 1, 2, 3, 4]) {
+			healthBar.animation.addByPrefix(Std.string(i), 'Health bar000' + Std.string(i), 24, false);
+		}
+		healthBar.animation.play('4');
+		healthBar.scale.set(0.6, 0.6);
+		healthBar.updateHitbox();
+		if(!downscroll)
+			healthBar.y = FlxG.height - healthBar.height;
+		else
+			healthBar.flipY = true;
+		healthBar.x -= 5;
 		add(healthBar);
 
-		iconDad = new HealthIcon();
-		iconDad.setIcon(PlayState.SONG.player2, false);
-		add(iconDad);
-
 		iconBf = new HealthIcon();
-		iconBf.setIcon(PlayState.SONG.player1, true);
+		iconBf.setIcon(PlayState.SONG.player1, false);
+		iconBf.x = 9;
+		if(!downscroll)
+			iconBf.y = healthBar.y + 20;
+		else
+			iconBf.y = healthBar.y;
 		add(iconBf);
 
 		infoTxt = new FlxText(0, 0, 0, "nothing");
@@ -52,80 +57,70 @@ class HudClass extends FlxGroup
 		add(infoTxt);
 
 		updateHitbox();
+	
 	}
-
+	
 	public final separator:String = " || ";
 
-	public function updateText()
+	public function updateText(step:Int)
 	{
-		infoTxt.text = "";
+		infoTxt.text = Std.string(step);
 
+		/*
 		infoTxt.text += 			'Score: '		+ Timings.score;
 		infoTxt.text += separator + 'Accuracy: '	+ Timings.accuracy + "%" + ' [${Timings.getRank()}]';
 		infoTxt.text += separator + 'Misses: '		+ Timings.misses;
+		*/
 
 		infoTxt.screenCenter(X);
 	}
 
 	public function updateHitbox(downscroll:Bool = false)
 	{
-		healthBarBG.screenCenter(X);
-		healthBarBG.y = (downscroll ? 50 : FlxG.height - healthBarBG.height - 50);
-
-		healthBar.setPosition(healthBarBG.x + 4, healthBarBG.y + 4);
-		updateIconPos();
-
-		updateText();
+		updateText(0);
 		infoTxt.screenCenter(X);
-		infoTxt.y = healthBarBG.y + healthBarBG.height + 4;
+		infoTxt.y = (downscroll ? 50 : FlxG.height - 30 - 50) + 30;
 	}
 
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
-		healthBar.percent = (PlayState.health * 50);
-
+		healthBar.animation.play(Std.string(Std.int(PlayState.health)));
 		updateIconPos();
-	}
-
-	public function updateIconPos()
-	{
-		var barX:Float = (healthBarBG.x + (healthBarBG.width * (2 - PlayState.health) / 2));
-		var barY:Float = (healthBarBG.y + healthBarBG.height / 2);
-
-		for(icon in [iconDad, iconBf])
-		{
-			icon.scale.set(
-				FlxMath.lerp(icon.scale.x, 1, FlxG.elapsed * 6),
-				FlxMath.lerp(icon.scale.y, 1, FlxG.elapsed * 6)
-			);
-			icon.updateHitbox();
-
-			icon.y = barY - icon.height / 2 - 12;
-			icon.x = barX;
-
-			if(icon == iconDad)
-				icon.x -= icon.width - 24;
-			else
-				icon.x -= 24;
-
-			if(icon == iconDad)
-				icon.setAnim(2 - PlayState.health);
-			else
-				icon.setAnim(PlayState.health);
-		}
 	}
 
 	public function beatHit(curBeat:Int = 0)
 	{
 		if(curBeat % 2 == 0)
 		{
-			for(icon in [iconDad, iconBf])
-			{
-				icon.scale.set(1.3,1.3);
-				icon.updateHitbox();
-				updateIconPos();
-			}
+			iconBf.scale.set(1.17,1.17);
+			iconBf.updateHitbox();
+			updateIconPos();
 		}
+	}
+	public function updateIconPos()
+	{
+		iconBf.scale.set(
+			FlxMath.lerp(iconBf.scale.x, 1, FlxG.elapsed * 6),
+			FlxMath.lerp(iconBf.scale.y, 1, FlxG.elapsed * 6)
+		);
+		iconBf.updateHitbox();
+		iconBf.screenCenter();
+		/*
+		iconBf.x = 9;
+		if(!downscroll)
+			iconBf.y = healthBar.y + 20;
+		else
+			iconBf.y = healthBar.y;
+		*/
+		var awesomeDiferentiator:Int = 7;
+
+		if(downscroll)
+			awesomeDiferentiator = -10;
+
+		iconBf.x = (healthBar.x + healthBar.width / 2 - iconBf.width / 2) - 213;
+		iconBf.y = (healthBar.y + healthBar.height/ 2 - iconBf.height/ 2) + awesomeDiferentiator;
+
+		iconBf.setAnim(PlayState.health);
 	}
 }

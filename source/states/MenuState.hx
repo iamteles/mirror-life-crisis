@@ -1,59 +1,101 @@
 package states;
 
-import data.Discord.DiscordClient;
 import flixel.FlxG;
+import flixel.FlxObject;
+import flixel.FlxBasic;
 import flixel.FlxSprite;
-import flixel.group.FlxGroup;
-import flixel.math.FlxMath;
+import flixel.FlxCamera;
+import flixel.addons.transition.FlxTransitionableState;
+import flixel.effects.FlxFlicker;
+import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
+import flixel.math.FlxMath;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
+import lime.app.Application;
+import flixel.addons.display.FlxBackdrop;
+import flixel.input.keyboard.FlxKey;
 import data.GameData.MusicBeatState;
-import data.SongData;
+import data.Conductor;
+import data.GameData.Utils;
 
 using StringTools;
 
 class MenuState extends MusicBeatState
 {
-	var optionShit:Array<String> = ["ugh", "hub"];
-	static var curSelected:Int = 1;
-
-	var optionGroup:FlxTypedGroup<FlxText>;
-
+	public static var curSelected:Int = 0;	
+	public var itemListing:Array<String> = ['Play', 'Credits', 'Settings'];
+	var itemGroup:FlxTypedGroup<FlxSprite>;
+	var bg:FlxBackdrop;
+	var box:FlxSprite;
+	var left:FlxSprite;
+	var right:FlxSprite;
+	var logo:FlxSprite;
 	override function create()
 	{
 		super.create();
 
-		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Song Selection", null);
-
-		var bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.fromRGB(80,80,80));
-		bg.screenCenter();
-		add(bg);
-
-		optionGroup = new FlxTypedGroup<FlxText>();
-		add(optionGroup);
-
-		for(i in 0...optionShit.length)
-		{
-			var item = new FlxText(0, 0, 0, optionShit[i].toUpperCase());
-			item.setFormat(Main.gFont, 60, 0xFFFFFFFF);
-			item.setBorderStyle(OUTLINE, FlxColor.BLACK, 3);
-			item.ID = i;
-			item.alignment = CENTER;
-			item.y = 50 + ((item.height + 100) * i);
-			item.updateHitbox();
-			item.screenCenter(X);
-			optionGroup.add(item);
+		if(FlxG.sound.music == null) {
+			FlxG.sound.playMusic(Paths.music('menu'), 1);
+			Conductor.setBPM(280);
 		}
 
-		var warn = new FlxText(0, 0, 0, "WARNING\nscores wont save for now");
-		warn.setFormat(Main.gFont, 27, 0xFFFF0000);
-		warn.setBorderStyle(OUTLINE, FlxColor.BLACK, 1);
-		warn.alignment = CENTER;
-		warn.updateHitbox();
-		warn.y = FlxG.height - warn.height - 8;
-		warn.screenCenter(X);
-		add(warn);
+		Utils.flash(FlxG.camera, 0.5);
+
+		bg = new FlxBackdrop(Paths.image("menu/grid"), XY, 0, 0);
+        bg.velocity.set(FlxG.random.bool(50) ? 90 : -90, FlxG.random.bool(50) ? 90 : -90);
+       	bg.screenCenter();
+        //bg.alpha = 0.4;
+        add(bg);
+
+		box = new FlxSprite(0, 0).loadGraphic(Paths.image("menu/box"));
+		box.x = FlxG.width - box.width;
+		box.y = FlxG.height - box.height;
+		add(box);
+
+		itemGroup = new FlxTypedGroup<FlxSprite>();
+		add(itemGroup);
+
+		for (i in 0...itemListing.length) {
+			var item:FlxSprite = new FlxSprite();
+			item.frames = Paths.getSparrowAtlas("menu/menu_buttons");
+			item.animation.addByPrefix('idle', itemListing[i] + ' button', 24, false);
+			item.animation.play("idle", true);
+			item.updateHitbox();
+			item.screenCenter(X);
+			//item.x += i * 700;
+			item.y = box.y + 45;
+			item.ID = i;
+			itemGroup.add(item);
+		}
+		left = new FlxSprite();
+		left.frames = Paths.getSparrowAtlas("menu/menuArrows");
+		left.animation.addByPrefix('idle', 'arrow left', 24, false);
+		left.animation.addByPrefix('push', 'arrow push left', 24, false);
+		left.animation.play("idle", true);
+		left.x = box.x + 100;
+		left.y = box.y + 100;
+		add(left);
+
+		right = new FlxSprite();
+		right.frames = Paths.getSparrowAtlas("menu/menuArrows");
+		right.animation.addByPrefix('idle', 'arrow right', 24, false);
+		right.animation.addByPrefix('push', 'arrow push right', 24, false);
+		right.animation.play("idle", true);
+		right.x = box.x + box.width - 150;
+		right.y = box.y + 100;
+		add(right);
+
+		logo = new FlxSprite(0, 0);
+		logo.frames = Paths.getSparrowAtlas("menu/logoBump");
+		logo.animation.addByPrefix('bump', 'logo bumpin', 24, false);
+		logo.animation.play("bump", true);
+		logo.updateHitbox();
+		logo.screenCenter();
+		logo.y -= 150;
+		add(logo);
 
 		changeSelection();
 	}
@@ -61,44 +103,71 @@ class MenuState extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
-		if(Controls.justPressed("UI_UP"))
+
+		if (FlxG.sound.music != null)
+			Conductor.songPos = FlxG.sound.music.time;
+
+		if(Controls.justPressed("UI_LEFT"))
 			changeSelection(-1);
-		if(Controls.justPressed("UI_DOWN"))
+		if(Controls.justPressed("UI_RIGHT"))
 			changeSelection(1);
 
-		if(FlxG.keys.justPressed.O)
-		{
-			Main.switchState(new states.menu.OptionsState());
-		}
+		if(Controls.pressed("UI_LEFT"))
+			left.animation.play("push");
+		else
+			left.animation.play("idle");
+
+		if(Controls.pressed("UI_RIGHT"))
+			right.animation.play("push");
+		else
+			right.animation.play("idle");
 
 		if(Controls.justPressed("ACCEPT"))
 		{
-			if(optionShit[curSelected] == 'hub') {
-				SideState.lvlId = 'street';
-				Main.switchState(new SideState());
-			}
-			else {
-				PlayState.SONG = SongData.loadFromJson(optionShit[curSelected]);
-				Main.switchState(new PlayState());
-			}
+			itemGroup.forEach(function(spr:FlxSprite)
+			{
+				FlxFlicker.flicker(spr, 1, 0.06, false, false, function(flick:FlxFlicker)
+				{
+					switch(itemListing[curSelected]) {
+						case 'Play':
+							SideState.lvlId = 'street';
+							Main.switchState(new SideState());
+							FlxG.sound.music.volume = 0;
+						case 'Credits':
+							Main.switchState(new DebugState());
+						case 'Settings':
+							Main.switchState(new states.menu.OptionsState());
+					}
+				});
+			});
 		}
 	}
+
+	var lerpVal:Float = 0.2;
 
 	public function changeSelection(change:Int = 0)
 	{
 		curSelected += change;
-		curSelected = FlxMath.wrap(curSelected, 0, optionShit.length - 1);
+		curSelected = FlxMath.wrap(curSelected, 0, itemListing.length - 1);
 
-		for (item in optionGroup) {
-			var daText:String = optionShit[item.ID].toUpperCase().replace("-", " ");
+		if(change != 0) FlxG.sound.play(Paths.sound("beep"));
 
-			if(curSelected == item.ID) {
-				item.text = '> ' + daText + ' <';
+		for (item in itemGroup) {
+			if(item.ID < curSelected)
+			{
+				item.x = -700;
 			}
-			else {
-				item.text = daText;
+			if(item.ID > curSelected)
+			{
+				item.x = 1700;
 			}
-			item.screenCenter(X);
+			if(item.ID == curSelected){
+				item.x = (FlxG.width - item.width) / 2;
+			}
 		}
+	}
+
+	private override function beatHit() {
+		logo.animation.play('bump');
 	}
 }

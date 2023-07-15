@@ -7,13 +7,12 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.system.FlxSound;
 import flixel.util.FlxColor;
 import flixel.math.FlxPoint;
+import states.SideState;
 
 using StringTools;
 
 class Player extends FlxSprite
 {
-	public var stopped = false;
-
 	var walkSpeed:Float = 260;
 	var runSpeed:Float = 420;
 	var speedState:Float = 0;
@@ -57,7 +56,7 @@ class Player extends FlxSprite
 		var left:Bool = FlxG.keys.anyPressed([A, LEFT]);
 		var right:Bool = FlxG.keys.anyPressed([D, RIGHT]);
 
-		if (!stopped)
+		if (!SideState.paused)
 		{
 			if (run)
 			{

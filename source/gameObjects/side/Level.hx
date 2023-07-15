@@ -22,6 +22,7 @@ typedef LevelInfo =
 	var spawnPoint:Array<Int>;
 	var boundaries:Null<Array<Int>>;
 	var camPos:Null<Array<Int>>;
+	var music:Null<String>;
 }
 
 typedef LevelObject =

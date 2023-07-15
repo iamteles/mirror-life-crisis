@@ -19,6 +19,7 @@ import data.*;
 import data.SongData.SwagSong;
 import data.chart.*;
 import data.GameData.MusicBeatState;
+import data.GameData.Utils;
 import gameObjects.*;
 import gameObjects.hud.*;
 import gameObjects.hud.note.*;
@@ -41,10 +42,10 @@ class PlayState extends MusicBeatState
 	public var inst:FlxSound;
 	public var vocals:FlxSound;
 	public var musicList:Array<FlxSound> = [];
-
+	public var daSong:String = "prismatic";
 	// 
 	public static var assetModifier:String = "base";
-	public static var health:Float = 1;
+	public static var health:Float = 5;
 	// score, misses, accuracy and other stuff
 	// are on the Timings.hx class!!
 
@@ -67,6 +68,7 @@ class PlayState extends MusicBeatState
 	// cameras!!
 	public var camGame:FlxCamera;
 	public var camHUD:FlxCamera;
+	public var camVignette:FlxCamera;
 	public var camOther:FlxCamera; // used so substates dont collide with camHUD.alpha or camHUD.visible
 	public static var defaultCamZoom:Float = 1.0;
 
@@ -79,9 +81,12 @@ class PlayState extends MusicBeatState
 	var camDisplaceY:Float;
 	var cameraMoveItensity:Float = 25;
 
+	var mustHit:Bool = true;
+	var vgblack:FlxSprite;
+
 	function resetStatics()
 	{
-		health = 1;
+		health = 5;
 		defaultCamZoom = 1.0;
 		assetModifier = "base";
 		SplashNote.resetStatics();
@@ -97,11 +102,15 @@ class PlayState extends MusicBeatState
 		if(SONG == null)
 			SONG = SongData.loadFromJson("ugh");
 
-		if(SONG.song.toLowerCase() == "collision")
+		daSong = SONG.song.toLowerCase();
+
+		if(daSong == "collision")
 			assetModifier = "pixel";
 
 		Conductor.setBPM(SONG.bpm);
 		Conductor.mapBPMChanges(SONG);
+
+
 
 		// setting up the cameras
 		camGame = new FlxCamera();
@@ -109,12 +118,16 @@ class PlayState extends MusicBeatState
 		camHUD = new FlxCamera();
 		camHUD.bgColor.alphaFloat = 0;
 
+		camVignette = new FlxCamera();
+		camVignette.bgColor.alphaFloat = 0;
+
 		camOther = new FlxCamera();
 		camOther.bgColor.alphaFloat = 0;
 
 		// adding the cameras
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camHUD, false);
+		FlxG.cameras.add(camVignette, false);
 		FlxG.cameras.add(camOther, false);
 
 		// default camera
@@ -125,17 +138,17 @@ class PlayState extends MusicBeatState
 		stageBuild = new Stage();
 		stageBuild.reloadStageFromSong(SONG.song);
 		add(stageBuild);
-
+		
 		camGame.zoom = defaultCamZoom;
 
 		dad = new Character();
 		dad.reloadChar(SONG.player2, false);
-		dad.setPosition(50, 700);
+		dad.setPosition(stageBuild.dadData[0], stageBuild.dadData[1]);
 		dad.y -= dad.height;
 
 		boyfriend = new Character();
 		boyfriend.reloadChar(SONG.player1, true);
-		boyfriend.setPosition(850, 700);
+		boyfriend.setPosition(stageBuild.bfData[0], stageBuild.bfData[1]);
 		boyfriend.y -= boyfriend.height;
 
 		characters.push(dad);
@@ -152,6 +165,8 @@ class PlayState extends MusicBeatState
 		for(item in addList)
 			add(item);
 
+		add(stageBuild.foreground);
+
 		followCamera(dad);
 		camFollow.setPosition(charFollow.x, charFollow.y);
 		FlxG.camera.follow(camFollow, LOCKON, 1);
@@ -161,6 +176,12 @@ class PlayState extends MusicBeatState
 		hudBuild.cameras = [camHUD];
 		add(hudBuild);
 
+		vgblack = new FlxSprite().loadGraphic(Paths.image("vignette"));
+		vgblack.screenCenter();
+		vgblack.cameras = [camVignette];
+		vgblack.alpha = 0;
+		add(vgblack);
+
 		// strumlines
 		strumlines = new FlxTypedGroup();
 		strumlines.cameras = [camHUD];
@@ -168,13 +189,23 @@ class PlayState extends MusicBeatState
 
 		//strumline.scrollSpeed = 4.0; // 2.8
 		var strumPos:Array<Float> = [FlxG.width / 2, FlxG.width / 4];
+		var posBF:Float;
+		var posOpp:Float;
+		if(daSong == 'prismatic') {
+			posBF = strumPos[0] - strumPos[1];
+			posOpp = strumPos[0] + strumPos[1];
+		}
+		else {
+			posBF = strumPos[0] + strumPos[1];
+			posOpp = strumPos[0] - strumPos[1];
+		}
 		var downscroll:Bool = SaveData.data.get("Downscroll");
 
-		dadStrumline = new Strumline(strumPos[0] - strumPos[1], dad, downscroll, false, true, assetModifier);
+		dadStrumline = new Strumline(posOpp, dad, downscroll, false, true, assetModifier);
 		dadStrumline.ID = 0;
 		strumlines.add(dadStrumline);
 
-		bfStrumline = new Strumline(strumPos[0] + strumPos[1], boyfriend, downscroll, true, false, assetModifier);
+		bfStrumline = new Strumline(posBF, boyfriend, downscroll, true, false, assetModifier);
 		bfStrumline.ID = 1;
 		strumlines.add(bfStrumline);
 
@@ -191,8 +222,6 @@ class PlayState extends MusicBeatState
 		}
 
 		hudBuild.updateHitbox(bfStrumline.downscroll);
-
-		var daSong:String = SONG.song.toLowerCase();
 
 		inst = new FlxSound();
 		inst.loadEmbedded(Paths.inst(daSong), false, false);
@@ -339,6 +368,14 @@ class PlayState extends MusicBeatState
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("Playing: " + SONG.song.toUpperCase().replace("-", " "), null);
 
+		switch(daSong) {
+			case 'prismatic':
+				vgblack.alpha = 0.4;
+				dad.alpha = 0;
+				camHUD.alpha = 0;
+				camGame.alpha = 0;
+		}
+
 		startCountdown();
 	}
 
@@ -359,13 +396,13 @@ class PlayState extends MusicBeatState
 
 			if(daCount != 4)
 			{
-				FlxG.sound.play(Paths.sound("beep"));
-
-				var hehe = new FlxText(0, 0, ["3", "2", "1", "GO"][daCount], true);
+				var which:String = ["3", "2", "1", "GO"][daCount];
+				var hehe = new FlxText(0, 0, which, true);
+				FlxG.sound.play(Paths.sound(which));
 				hehe.setFormat(Main.gFont, 60, 0xFFFFFFFF);
 				hehe.setBorderStyle(OUTLINE, 0xFF000000, 3);
 				hehe.updateHitbox();
-				hehe.cameras = [camHUD];
+				hehe.cameras = [camVignette];
 				hehe.screenCenter();
 				add(hehe);
 
@@ -444,11 +481,14 @@ class PlayState extends MusicBeatState
 			noteDiff = 0;
 
 		var judge:Float = Timings.diffToJudge(noteDiff);
-		if(miss)
+		if(miss) {
+			health -= 0.5;
 			judge = Timings.timingsMap.get('miss')[1];
+		}
+		else {
+			health += 0.5;
+		}
 
-		// handling stuff
-		health += 0.05 * judge;
 		Timings.score += Math.floor(100 * judge);
 		Timings.addAccuracy(judge);
 
@@ -465,7 +505,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		hudBuild.updateText();
+
 	}
 
 	// if youre holding a note
@@ -765,11 +805,11 @@ class PlayState extends MusicBeatState
 								}
 
 								var missJudge:Float = Timings.timingsMap.get("miss")[1];
-								health += 0.05 * missJudge;
+								health -= 0.5;
 								Timings.score += Math.floor(100 * missJudge);
 								Timings.addAccuracy(missJudge);
 								Timings.misses++;
-								hudBuild.updateText();
+								//hudBuild.updateText();
 							}
 						}
 					}
@@ -777,7 +817,7 @@ class PlayState extends MusicBeatState
 			}
 
 			// dumb stuff!!!
-			if(SONG.song.toLowerCase() == "disruption")
+			if(daSong == "disruption")
 			{
 				for(strum in strumline.strumGroup)
 				{
@@ -823,9 +863,13 @@ class PlayState extends MusicBeatState
 		}
 
 		var curSection = PlayState.SONG.notes[Std.int(curStep / 16)];
+
 		if(curSection != null)
 		{
-			if(curSection.mustHitSection) {
+			if(daSong != 'prismatic')
+				mustHit = curSection.mustHitSection;
+
+			if(mustHit) {
 				followCamera(boyfriend);
 				switch (boyfriend.animation.curAnim.name)
 				{
@@ -870,6 +914,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
+		FlxG.camera.followLerp = Utils.camLerp(0.04);
 		camFollow.setPosition(charFollow.x + camDisplaceX, charFollow.y + camDisplaceY);
 
 		if(health <= 0)
@@ -880,7 +925,7 @@ class PlayState extends MusicBeatState
 		camGame.zoom = FlxMath.lerp(camGame.zoom, defaultCamZoom, elapsed * 6);
 		camHUD.zoom  = FlxMath.lerp(camHUD.zoom,  1.0, elapsed * 6);
 
-		health = FlxMath.bound(health, 0, 2); // bounds the health
+		health = FlxMath.bound(health, 0, 5); // bounds the health
 	}
 
 	public function followCamera(?char:Character, ?offsetX:Float = 0, ?offsetY:Float = 0)
@@ -890,11 +935,12 @@ class PlayState extends MusicBeatState
 		if(char != null)
 		{
 			var playerMult:Int = (char.isPlayer ? -1 : 1);
+			var which:Array<Float> = (char.isPlayer ? stageBuild.bfData : stageBuild.dadData);
 
 			charFollow.setPosition(char.getMidpoint().x + (200 * playerMult), char.getMidpoint().y - 20);
 
-			charFollow.x += char.cameraOffset.x * playerMult;
-			charFollow.y += char.cameraOffset.y;
+			charFollow.x += (char.cameraOffset.x * playerMult) + which[2];
+			charFollow.y += char.cameraOffset.y + which[3];
 		}
 
 		charFollow.x += offsetX;
@@ -904,6 +950,7 @@ class PlayState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
+		
 		hudBuild.beatHit(curBeat);
 
 		if(curBeat % 4 == 0)
@@ -933,6 +980,38 @@ class PlayState extends MusicBeatState
 	{
 		super.stepHit();
 		syncSong();
+
+		hudBuild.updateText(curStep);
+
+		switch (daSong) {
+			case 'prismatic':
+				switch(curStep) {
+					case 1:
+						FlxTween.tween(camGame, {alpha: 1}, 7, {ease: FlxEase.sineInOut});
+					case 200 | 338 | 471 | 739 | 1009:
+						mustHit = false;
+					case 136 | 269 | 406 | 537 | 944 | 1075:
+						mustHit = true;
+					case 67:
+						// enter clown minami
+						FlxTween.tween(camHUD, {alpha: 1}, 2, {ease: FlxEase.sineInOut});
+						Utils.flash(camVignette);
+						dad.alpha = 1;
+						defaultCamZoom = 0.67;
+					case 605:
+						defaultCamZoom = 0.77;
+						Utils.flash(camHUD);
+					case 874:
+						defaultCamZoom = 0.67;
+						Utils.flash(camHUD);
+					case 1213:
+						FlxTween.tween(camHUD, {alpha: 0}, 5, {ease: FlxEase.sineInOut});
+						mustHit = false;
+					case 1304:
+						//bow down
+						dad.playAnim('bow', true);
+				}
+		}
 	}
 
 	public function syncSong(?forced:Bool = false):Void
@@ -998,6 +1077,6 @@ class PlayState extends MusicBeatState
 		isDead = true;
 		activateTimers(false);
 		persistentDraw = false;
-		openSubState(new GameOverSubState(boyfriend));
+		openSubState(new GameOverSubState());
 	}
 }

@@ -17,7 +17,17 @@ import flixel.util.FlxTimer;
 import gameObjects.side.Level;
 import gameObjects.side.Player;
 import data.GameData.MusicBeatState;
-import data.SongData;
+import data.*;
+import openfl.display.Shader;
+import openfl.display.GraphicsShader;
+import openfl.filters.ShaderFilter;
+import flixel.system.FlxSound;
+import subStates.*;
+
+#if sys
+import sys.FileSystem;
+import sys.io.File;
+#end
 
 class SideState extends MusicBeatState
 {
@@ -31,15 +41,20 @@ class SideState extends MusicBeatState
 	public static var lvlId:String = 'street';
 	public static var player:Player;
 	public static var subtitle:FlxTypeText;
+	public static var paused:Bool = true;
 
 	var currentStyle:FlxCameraFollowStyle = FlxCameraFollowStyle.PLATFORMER;
 
 	var spawn:Array<Int> = [400, 0];
+	var preloadedSounds:Array<String> = ["running", "footsteps", "click", "beep"];
+	public static var voiceline:FlxSound;
+	public static var ambience:FlxSound;
 
 	function resetVariables()
 	{
 		inTextBox = false;
 		hasScrolled = false;
+		paused = false;
 	}
 
 	override public function create()
@@ -73,20 +88,48 @@ class SideState extends MusicBeatState
 		add(player);
 		add(lvlConstruct.foregroundLayer);
 
-		subtitle = new FlxTypeText(0, 600, 1000, 'placeholder', true);
+		subtitle = new FlxTypeText(0, 530, 800, 'placeholder', true);
 		subtitle.alpha = 0;
 		subtitle.setFormat(Main.gFont, 30, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		subtitle.screenCenter(X);
-		subtitle.borderSize = 1.5;
+		subtitle.borderSize = 2;
 		subtitle.cameras = [camHUD];
 		subtitle.skipKeys = [FlxKey.SPACE];
-		subtitle.delay = 0.04;
+		subtitle.delay = 0.05;
 		add(subtitle);
 
 		camFollow.setPosition(player.getMidpoint().x + lvlConstruct.camPos[0], player.getMidpoint().y + lvlConstruct.camPos[1]);
 		FlxG.camera.follow(camFollow, currentStyle, 1);
 		FlxG.camera.focusOn(camFollow.getPosition());
 		FlxG.camera.setScrollBoundsRect(Level.boundaries[0], Level.boundaries[1], Level.boundaries[2], Level.boundaries[3], true);
+
+		var antiFishLens:FlxRuntimeShader = new FlxRuntimeShader(File.getContent(Paths.shader('afl')));
+		FlxG.camera.setFilters([new ShaderFilter(antiFishLens)]);
+
+		for(sound in preloadedSounds) {
+			Paths.preloadSound(sound);
+		}
+
+		ambience = new FlxSound();
+
+		if(lvlConstruct.lvlData.music != null)
+		{
+			ambience.loadEmbedded(Paths.music(lvlConstruct.lvlData.music), true, false);
+			FlxG.sound.list.add(ambience);
+			ambience.volume = 0;
+			ambience.play();
+			ambience.fadeIn(0.32, 0, 0.5);
+		}
+
+		voiceline = new FlxSound();
+		FlxG.sound.list.add(voiceline);
+
+		switch(lvlId.toLowerCase()) {
+			case 'street':
+				textbox('One day in particular, as Minami was heading home to partake in her depressing activities, she came across a strange alleyway.', '12');
+			case 'alley':
+				textbox('In there, she found herself a strange vintage mirror, and decided to approach it.', '13');
+		}
 	}
 
 	override public function update(elapsed:Float)
@@ -99,11 +142,13 @@ class SideState extends MusicBeatState
 
 		if(FlxG.keys.justPressed.SPACE) {
 			if(inTextBox && hasScrolled) {
+				if(voiceline.playing) voiceline.stop();
+				FlxG.sound.play(Paths.sound('click'));
 				FlxTween.tween(subtitle, {alpha: 0}, 0.4, {
 					ease: FlxEase.sineInOut,
 					onComplete: function(twn:FlxTween)
 					{
-						player.stopped = false;
+						paused = false;
 						inTextBox = false;
 						hasScrolled = false;
 					}
@@ -126,20 +171,41 @@ class SideState extends MusicBeatState
 			}
 		}
 
-		if (FlxG.keys.justPressed.BACKSPACE)
-		{
-			Main.switchState(new MenuState());
-		}
 		if (FlxG.keys.justPressed.R)
 			FlxG.resetState();
+	
+		if(Controls.justPressed("PAUSE"))
+		{
+			pause();
+		}
 	}
 
-	public static function textbox(text:String)
+	override public function onFocusLost():Void
 	{
+		if(!paused) pause();
+		super.onFocusLost();
+	}
+
+	public function pause()
+	{
+		if(paused || inTextBox) return;
+		paused = true;
+		//openSubState(new PauseRedux());
+		openSubState(new DialogueSubstate());
+	}
+
+	public static function textbox(text:String, ?sound:String = 'nan', ?delay:Float = 0.05)
+	{
+		subtitle.delay = delay;
 		subtitle.resetText(text);
 		subtitle.alpha = 1;
 		inTextBox = true;
-		player.stopped = true;
+		paused = true;
+
+		if(sound != "nan") {
+			voiceline.loadEmbedded(Paths.sound('lines/' + sound), false, false);
+			voiceline.play();
+		}
 		subtitle.start(false, function()
 		{
 			new FlxTimer().start(0.1, function(tmr:FlxTimer)
@@ -162,7 +228,7 @@ class SideState extends MusicBeatState
 					case 'test2':
 						SideState.textbox('pull worked!');
 					case 'ONE':
-						PlayState.SONG = SongData.loadFromJson("ugh");
+						PlayState.SONG = SongData.loadFromJson("prismatic");
 						Main.switchState(new PlayState());
 				}
 			}
@@ -171,6 +237,7 @@ class SideState extends MusicBeatState
 
 	function warp(?location:String = 'street') {
 		lvlId = location;
+		ambience.fadeOut(0.32);
 		Main.switchState(new SideState());
 	}
 }

@@ -4,7 +4,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.graphics.FlxGraphic;
 import data.GameData.MusicBeatState;
-import states.*;
+import states.SplashState;
 
 class Init extends MusicBeatState
 {
@@ -18,6 +18,6 @@ class Init extends MusicBeatState
 		//FlxG.mouse.visible = false;
 		FlxGraphic.defaultPersist = true;
 		
-		Main.switchState(new MenuState());
+		Main.switchState(new FlixelSplash());
 	}
 }

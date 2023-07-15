@@ -36,7 +36,7 @@ class HealthIcon extends FlxSprite
 	{
 		var daFrame:Int = 0;
 
-		if(health < 0.6)
+		if(health < 2)
 			daFrame = 1;
 
 		animation.curAnim.curFrame = daFrame;

@@ -1,0 +1,14 @@
+{
+    "name": "Dirk",
+    "pos": [0, 0],
+    "frames": [
+        {
+            "expression": "neutral",
+            "offset": [0, 0]
+        },
+        {
+            "expression": "pissed",
+            "offset": [0, 0]
+        }
+    ]
+}

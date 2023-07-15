@@ -192,6 +192,8 @@ class OptionsState extends MusicBeatState
 		curSelected += change;
 		curSelected = FlxMath.wrap(curSelected, 0, optionShit.get(curCat).length - 1);
 
+		FlxG.sound.play(Paths.sound("beep"));
+
 		for(item in grpTexts.members)
 		{
 			item.focusY = item.ID;

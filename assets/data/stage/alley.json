@@ -1,0 +1,13 @@
+{
+    "zoom": 1,
+    "bfData": [0, 0, 0, 0],
+    "dadData": [0, 0, 0, 0],
+    "objects": [
+        {
+            "objName": "alley",
+            "path": "backgrounds/alley/alley",
+            "position": [0, -80],
+            "scale": 1
+        }
+    ]
+}

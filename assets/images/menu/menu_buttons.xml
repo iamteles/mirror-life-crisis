@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="menu_buttons.png">
+	<!-- Created with Adobe Animate version 20.0.0.17400 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Credits button0000" x="489" y="34" width="364" height="185"/>
+	<SubTexture name="Credits button0001" x="489" y="34" width="364" height="185"/>
+	<SubTexture name="Credits button0002" x="489" y="237" width="364" height="185"/>
+	<SubTexture name="Credits button0003" x="489" y="237" width="364" height="185"/>
+	<SubTexture name="Credits button0004" x="489" y="440" width="364" height="185"/>
+	<SubTexture name="Credits button0005" x="489" y="440" width="364" height="185"/>
+	<SubTexture name="Play button0000" x="34" y="634" width="249" height="181"/>
+	<SubTexture name="Play button0001" x="34" y="634" width="249" height="181"/>
+	<SubTexture name="Play button0002" x="301" y="643" width="249" height="181"/>
+	<SubTexture name="Play button0003" x="301" y="643" width="249" height="181"/>
+	<SubTexture name="Play button0004" x="568" y="643" width="249" height="181"/>
+	<SubTexture name="Play button0005" x="568" y="643" width="249" height="181"/>
+	<SubTexture name="Settings button0000" x="34" y="34" width="437" height="182"/>
+	<SubTexture name="Settings button0001" x="34" y="34" width="437" height="182"/>
+	<SubTexture name="Settings button0002" x="34" y="234" width="437" height="182"/>
+	<SubTexture name="Settings button0003" x="34" y="234" width="437" height="182"/>
+	<SubTexture name="Settings button0004" x="34" y="434" width="437" height="182"/>
+	<SubTexture name="Settings button0005" x="34" y="434" width="437" height="182"/>
+</TextureAtlas>

@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.system.FlxSound;
+import flixel.FlxSprite;
 import lime.utils.Assets;
 import openfl.display.BitmapData;
 import openfl.media.Sound;
@@ -103,4 +104,17 @@ class Paths
 	
 	public static function getSparrowAtlas(key:String)
 		return FlxAtlasFrames.fromSparrow(getGraphic(key), 'assets/images/$key.xml');
+
+	public static function preloadGraphic(key:String)
+	{
+		var what = new FlxSprite().loadGraphic(image(key));
+		FlxG.state.add(what);
+		FlxG.state.remove(what);
+	}
+	public static function preloadSound(key:String)
+	{
+		var what = new FlxSound().loadEmbedded(getSound(key), false, false);
+		what.play();
+		what.stop();
+	}
 }

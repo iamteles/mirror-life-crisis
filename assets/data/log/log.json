@@ -1,0 +1,15 @@
+{
+    "characters": ["dirk", "dirk2"],
+    "lines": [
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "penis penis penis"
+        },
+        {
+            "character": "right",
+            "frame": "pissed",
+            "text": "penis penis penis"
+        }
+    ]
+}
