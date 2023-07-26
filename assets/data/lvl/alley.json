@@ -42,7 +42,8 @@
             "wrpName": "goback",
             "position": [-50, 0],
             "size": [1, 1000],
-            "location": "street"
+            "location": "street",
+            "ret": true
         }
     ]
 }

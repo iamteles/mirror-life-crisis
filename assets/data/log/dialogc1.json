@@ -1,0 +1,63 @@
+{
+    "characters": ["c1", "minami"],
+    "finisher": "proglexi",
+    "lines": [
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "Hiya!! Welcome to Fooltopia!"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "What is this place?"
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "This is the Clown Village of Fooltopia!"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "And.. how do i go back home?"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "I really need to go to bed, i have work tomorrow morning…"
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "Thats pretty obvious!"
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "You can't!"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "What.",
+            "delay": 0.15
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "Mm hm!",
+            "delay": 0.05
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "Im afraid theres no way back now, sweetie!"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "Well isnt that just great…"
+        }
+    ]
+}

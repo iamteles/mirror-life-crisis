@@ -1,0 +1,11 @@
+{
+    "characters": ["clownami", "minami"],
+    "finisher": "",
+    "lines": [
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": ":)"
+        }
+    ]
+}

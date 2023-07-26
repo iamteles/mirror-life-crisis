@@ -52,7 +52,7 @@ class DialogueChar extends FlxTypedGroup<FlxBasic>
 		trace('Attempt load.');
 		try
 		{
-			charData = haxe.Json.parse(File.getContent('assets/data/chars/' + char + '.json').trim());
+			charData = haxe.Json.parse(File.getContent('assets/data/logchars/' + char + '.json').trim());
 		}
 		catch (e)
 		{

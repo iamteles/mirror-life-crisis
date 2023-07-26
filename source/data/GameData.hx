@@ -12,10 +12,15 @@ import data.Conductor.BPMChangeEvent;
 class Utils
 {
 	public static function flash(camera:FlxCamera, ?duration:Float = 0.5, ?color:FlxColor) {
-		//if(!ClientPrefs.flashing) color.alphaFloat = 0.5;
+		if(!SaveData.data.get("Flashing Lights")) return;
 		camera.flash(color, duration, null, true);
 	}
 
+	public static function bang(camera:FlxCamera, ?duration:Float = 0.5, ?color:FlxColor) {
+		if(!SaveData.data.get("Flashbang Mode")) return;
+		FlxG.sound.play(Paths.sound('bang'));
+		camera.flash(color, duration, null, true);
+	}
 
 	inline public static function boundTo(value:Float, min:Float, max:Float):Float {
 		return Math.max(min, Math.min(max, value));

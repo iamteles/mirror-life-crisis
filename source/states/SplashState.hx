@@ -84,7 +84,7 @@ class FlixelSplash extends MusicBeatState
 		#if FLX_SOUND_SYSTEM
 		if (!muted)
 		{
-			FlxG.sound.load(FlxAssets.getSound("flixel/sounds/flixel")).play();
+			FlxG.sound.play(Paths.sound("flixel"), 1, false, null, true);
 		}
 		#end
 	}
@@ -261,14 +261,14 @@ class ShatterdiskSplash extends MusicBeatState
 		}
 
 		if(sprite.animation.curAnim.name == "start" && sprite.animation.curAnim.finished)
-			FlxG.camera.fade(FlxColor.BLACK, 3.25, false, finish);
+			FlxG.camera.fade(FlxColor.BLACK, 1, false, finish);
 		
 		super.update(elapsed);
 	}
 	
 	private function finish():Void
 	{
-		FlxG.switchState(new MenuState());
+		FlxG.switchState(new WarningState());
 	}
 	
 }

@@ -19,14 +19,14 @@ class Player extends FlxSprite
 
 	private var scaleOffset:FlxPoint = new FlxPoint();
 
-	var walkingSound:FlxSound;
-	var runningSound:FlxSound;
+	public var walkingSound:FlxSound;
+	public var runningSound:FlxSound;
 
 	public function new(x:Float, y:Float)
 	{
 		super(x, y);
 
-		frames = Paths.getSparrowAtlas("side/minami");
+		frames = Paths.getSparrowAtlas("side/chars/minami");
 
 		animation.addByPrefix('idle', 		'Minami Stand', 24, true);
 		animation.addByPrefix('walk', 		'Minami Walk', 24, true);

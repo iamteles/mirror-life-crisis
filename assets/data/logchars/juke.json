@@ -1,0 +1,13 @@
+{
+    "name": "Juke",
+    "pos": [-350, -170],
+    "flipped": [false, false],
+    "scale": 1.4,
+    "frames": [
+        {
+            "expression": "neutral",
+            "offset": [0, 0],
+            "semiscale": 1
+        }
+    ]
+}

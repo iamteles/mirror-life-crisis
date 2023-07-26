@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="c1.png">
+	<!-- Created with Adobe Animate version 20.0.0.17400 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="C10000" x="337" y="34" width="282" height="305" frameX="0" frameY="-1" frameWidth="285" frameHeight="306"/>
+	<SubTexture name="C10001" x="337" y="34" width="282" height="305" frameX="0" frameY="-1" frameWidth="285" frameHeight="306"/>
+	<SubTexture name="C10002" x="337" y="34" width="282" height="305" frameX="0" frameY="-1" frameWidth="285" frameHeight="306"/>
+	<SubTexture name="C10003" x="337" y="34" width="282" height="305" frameX="0" frameY="-1" frameWidth="285" frameHeight="306"/>
+	<SubTexture name="C10004" x="337" y="34" width="282" height="305" frameX="0" frameY="-1" frameWidth="285" frameHeight="306"/>
+	<SubTexture name="C10005" x="337" y="34" width="282" height="305" frameX="0" frameY="-1" frameWidth="285" frameHeight="306"/>
+	<SubTexture name="C10006" x="337" y="34" width="282" height="305" frameX="0" frameY="-1" frameWidth="285" frameHeight="306"/>
+	<SubTexture name="C10007" x="34" y="34" width="285" height="306"/>
+	<SubTexture name="C10008" x="34" y="34" width="285" height="306"/>
+	<SubTexture name="C10009" x="34" y="34" width="285" height="306"/>
+	<SubTexture name="C10010" x="34" y="34" width="285" height="306"/>
+	<SubTexture name="C10011" x="34" y="34" width="285" height="306"/>
+	<SubTexture name="C10012" x="34" y="34" width="285" height="306"/>
+	<SubTexture name="C10013" x="34" y="34" width="285" height="306"/>
+</TextureAtlas>

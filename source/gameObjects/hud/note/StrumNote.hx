@@ -30,41 +30,45 @@ class StrumNote extends FlxSprite
 
 		direction = NoteUtil.getDirection(strumData);
 
-		switch(assetModifier)
-		{
-			case "pixel":
-				strumSize = 6;
-				loadGraphic(Paths.image("notes/pixel/notesPixel"), true, 17, 17);
+		strumSize = 0.7;
+		frames = Paths.getSparrowAtlas("notes/base/strums");
 
-				animation.add("static",  [strumData], 						12, false);
-				animation.add("pressed", [strumData + 8], 					12, false);
-				animation.add("confirm", [strumData + 12, strumData + 16], 	12, false);
+		addDefaultAnims();
 
-				antialiasing = false;
-
-				addOffset("static");
-				addOffset("pressed");
-				addOffset("confirm");
-
-			default:
-				strumSize = 0.7;
-				frames = Paths.getSparrowAtlas("notes/base/strums");
-
-				addDefaultAnims();
-
-				addOffset("static", 0, 0);
-				addOffset("pressed", -2, -2);
-				addOffset("confirm", 36, 36);
-
-				switch(assetModifier)
-				{
-					case "doido":
-						frames = Paths.getSparrowAtlas("notes/doido/strums");
-						addDefaultAnims();
-						strumSize = 0.95;
-						addOffset("confirm", 6.5, 8);
-				}
+		if (!SaveData.data.get("Downscroll")) {
+			switch(strumData) {
+				case 0:
+					addOffset("static", 16, -14);
+					addOffset("pressed", 14, -16);
+					addOffset("confirm", 50, 22);
+				case 3:
+					addOffset("static", 0, -14);
+					addOffset("pressed", -2, -16);
+					addOffset("confirm", 36, 22);
+				default:
+					addOffset("static", 0, 0);
+					addOffset("pressed", -2, -2);
+					addOffset("confirm", 36, 36);
+			}
 		}
+		else {
+			switch(strumData) {
+				case 0:
+					addOffset("static", 16, 6);
+					addOffset("pressed", 14, 4);
+					addOffset("confirm", 50, 42);
+				case 3:
+					addOffset("static", 0, 6);
+					addOffset("pressed", -2, 4);
+					addOffset("confirm", 36, 42);
+				default:
+					addOffset("static", 0, 0);
+					addOffset("pressed", -2, -2);
+					addOffset("confirm", 36, 36);
+			}
+		}
+
+
 		playAnim("static"); // once to get the scale offset
 
 		scale.set(strumSize, strumSize);

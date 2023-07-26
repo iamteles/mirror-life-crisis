@@ -2,6 +2,7 @@
     "zoom": 0.9,
     "music": "string",
     "spawnPoint": [200, 200],
+    "retPoint": [1500, 200],
     "boundaries": [0, -1000, 1800, 4000],
     "camPos": [0, -200],
     "objects": [
@@ -41,7 +42,8 @@
             "wrpName": "gotoalleyway",
             "position": [1900, 0],
             "size": [1, 1000],
-            "location": "alley"
+            "location": "alley",
+            "ret": false
         }
     ]
 }

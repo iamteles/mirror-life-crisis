@@ -23,6 +23,7 @@ import openfl.display.GraphicsShader;
 import openfl.filters.ShaderFilter;
 import flixel.system.FlxSound;
 import subStates.*;
+import states.othershit.*;
 
 #if sys
 import sys.FileSystem;
@@ -42,6 +43,7 @@ class SideState extends MusicBeatState
 	public static var player:Player;
 	public static var subtitle:FlxTypeText;
 	public static var paused:Bool = true;
+	public static var ret:Bool = false;
 
 	var currentStyle:FlxCameraFollowStyle = FlxCameraFollowStyle.PLATFORMER;
 
@@ -50,11 +52,15 @@ class SideState extends MusicBeatState
 	public static var voiceline:FlxSound;
 	public static var ambience:FlxSound;
 
+	var lines:Array<Array<String>> = [];
+	public static var curLine:Int = 0;
+
 	function resetVariables()
 	{
 		inTextBox = false;
 		hasScrolled = false;
 		paused = false;
+		curLine = 0;
 	}
 
 	override public function create()
@@ -77,7 +83,10 @@ class SideState extends MusicBeatState
 
 		lvlConstruct = new Level();
 		lvlConstruct.loadJson();
-		spawn = lvlConstruct.spawnPoint;
+		if(ret)
+			spawn = lvlConstruct.retPoint;
+		else
+			spawn = lvlConstruct.spawnPoint;
 		add(lvlConstruct);
 		add(lvlConstruct.hbxLayer);
 		add(lvlConstruct.warpLayer);
@@ -86,6 +95,8 @@ class SideState extends MusicBeatState
 
 		player = new Player(spawn[0], spawn[1]);
 		add(player);
+		if(ret)
+			player.facing = LEFT;
 		add(lvlConstruct.foregroundLayer);
 
 		subtitle = new FlxTypeText(0, 530, 800, 'placeholder', true);
@@ -103,8 +114,10 @@ class SideState extends MusicBeatState
 		FlxG.camera.focusOn(camFollow.getPosition());
 		FlxG.camera.setScrollBoundsRect(Level.boundaries[0], Level.boundaries[1], Level.boundaries[2], Level.boundaries[3], true);
 
-		var antiFishLens:FlxRuntimeShader = new FlxRuntimeShader(File.getContent(Paths.shader('afl')));
-		FlxG.camera.setFilters([new ShaderFilter(antiFishLens)]);
+		if (SaveData.data.get('Shaders')) {
+			var antiFishLens:FlxRuntimeShader = new FlxRuntimeShader(File.getContent(Paths.shader('afl')));
+			FlxG.camera.setFilters([new ShaderFilter(antiFishLens)]);
+		}
 
 		for(sound in preloadedSounds) {
 			Paths.preloadSound(sound);
@@ -126,9 +139,37 @@ class SideState extends MusicBeatState
 
 		switch(lvlId.toLowerCase()) {
 			case 'street':
-				textbox('One day in particular, as Minami was heading home to partake in her depressing activities, she came across a strange alleyway.', '12');
+				if(SaveData.progression <= 0) {
+					SaveData.progress(1);
+					textbox('One day in particular, as Minami was heading home to partake in her depressing activities, she came across a strange alleyway.', '12');
+				}
+
 			case 'alley':
-				textbox('In there, she found herself a strange vintage mirror, and decided to approach it.', '13');
+				if(SaveData.progression <= 1) {
+					SaveData.progress(2);
+					textbox('In there, she found herself a strange vintage mirror, and decided to approach it.', '13');
+				}
+
+			case 'park':
+				if(SaveData.progression == 4) {
+					paused = true;
+					DialogueSubstate.dialog = "echo";
+					openSubState(new DialogueSubstate());
+				}
+			case 'village': 
+				if(SaveData.progression <= 2) {
+					SaveData.progress(3);
+					lines = [
+						['And, just like that, Minami found herself in the wonderfull world of Fooltopia!', '30'],
+						['Everyone is dressed like clowns, there is no sadness here.', '31'],
+						['Now Minami, remember, these clowns are here to make you happy and less depressed.', '32'],
+						['This is your second chance.', '33'],
+						['If you arent happy after this, i might have to do a bit of intervening.', '34'],
+						['And we dont want that now, do we.', '35'],
+						['Go carry on, then. Go talk to the locals', '36']
+					];
+					textbox(lines[curLine][0], lines[curLine][1]);
+				}
 		}
 	}
 
@@ -148,9 +189,17 @@ class SideState extends MusicBeatState
 					ease: FlxEase.sineInOut,
 					onComplete: function(twn:FlxTween)
 					{
-						paused = false;
-						inTextBox = false;
 						hasScrolled = false;
+
+						if(curLine >= lines.length) {
+							paused = false;
+							inTextBox = false;
+							curLine = 0;
+						}
+	
+						else {
+							textbox(lines[curLine][0], lines[curLine][1]);
+						}
 					}
 				});
 			}
@@ -166,7 +215,7 @@ class SideState extends MusicBeatState
 				switch (obj[1])
 				{
 					default:
-						warp(obj[1]);
+						warp(obj[1], obj[2]);
 				}
 			}
 		}
@@ -189,9 +238,10 @@ class SideState extends MusicBeatState
 	public function pause()
 	{
 		if(paused || inTextBox) return;
+		player.walkingSound.stop();
+		player.runningSound.stop();
 		paused = true;
-		//openSubState(new PauseRedux());
-		openSubState(new DialogueSubstate());
+		openSubState(new PauseRedux());
 	}
 
 	public static function textbox(text:String, ?sound:String = 'nan', ?delay:Float = 0.05)
@@ -201,6 +251,8 @@ class SideState extends MusicBeatState
 		subtitle.alpha = 1;
 		inTextBox = true;
 		paused = true;
+
+		curLine++;
 
 		if(sound != "nan") {
 			voiceline.loadEmbedded(Paths.sound('lines/' + sound), false, false);
@@ -221,6 +273,9 @@ class SideState extends MusicBeatState
 		{
 			if (player.overlaps(obj[0]) && !SideState.inTextBox)
 			{
+				var add:String = '';
+				if(SaveData.progression >= 5)
+					add = 'F';
 				switch (obj[1])
 				{
 					case 'test':
@@ -228,15 +283,46 @@ class SideState extends MusicBeatState
 					case 'test2':
 						SideState.textbox('pull worked!');
 					case 'ONE':
-						PlayState.SONG = SongData.loadFromJson("prismatic");
-						Main.switchState(new PlayState());
+						Main.switchState(new Prism());
+					case 'dialogc1' | 'dialogpete':
+						player.walkingSound.stop();
+						player.runningSound.stop();
+						paused = true;
+						DialogueSubstate.dialog = obj[1] + add;
+						openSubState(new DialogueSubstate());
+					case 'dialogjuke':
+						if(SaveData.progression >= 5) {
+							player.walkingSound.stop();
+							player.runningSound.stop();
+							paused = true;
+							openSubState(new FreeplayState());
+						}
+						else {
+							player.walkingSound.stop();
+							player.runningSound.stop();
+							paused = true;
+							DialogueSubstate.dialog = obj[1];
+							openSubState(new DialogueSubstate());
+						}
+					case 'dialogclown':
+						if(!SaveData.clownCheck()) {
+							textbox('You should probably talk to all the locals first.');
+						}
+						else {
+							player.walkingSound.stop();
+							player.runningSound.stop();
+							paused = true;
+							DialogueSubstate.dialog = obj[1] + add;
+							openSubState(new DialogueSubstate());
+						}
 				}
 			}
 		}
 	}
 
-	function warp(?location:String = 'street') {
+	function warp(?location:String = 'street', ?ret:Bool = false) {
 		lvlId = location;
+		states.SideState.ret = ret;
 		ambience.fadeOut(0.32);
 		Main.switchState(new SideState());
 	}

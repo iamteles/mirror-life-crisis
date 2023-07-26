@@ -59,13 +59,20 @@ class SongData
 		};
 	}
 
-	inline static public function songJson(song:String)
-		return 'assets/songs/${song}/${song}.json';
+	inline static public function songJson(song:String, string:String) {
+		trace('load ' + 'assets/songs/${song}/${song}${string}.json');
+		return 'assets/songs/${song}/${song}${string}.json';
+	}
 
 	// stuff from fnf
-	inline public static function loadFromJson(jsonInput:String):SwagSong
+	inline public static function loadFromJson(jsonInput:String, ?diff:String = 'NORMAL'):SwagSong
 	{
-		var rawJson = File.getContent(songJson(jsonInput)).trim();
+		var string:String = '';
+		if (diff == 'MANIA')
+			string = '-mania';
+
+		trace ('diff is ' + string);
+		var rawJson = File.getContent(songJson(jsonInput, string)).trim();
 
 		while (!rawJson.endsWith("}"))
 			rawJson = rawJson.substr(0, rawJson.length - 1);

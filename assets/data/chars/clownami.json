@@ -1,0 +1,30 @@
+{
+    "globalOffset": [-500, 80],
+    "cameraOffset": [910, 20],
+    "offsets": [
+        {
+            "anim": "idle",
+            "pos": [-1362, 24]
+        },
+        {
+            "anim": "singLEFT",
+            "pos": [-1170, -55]
+        },
+        {
+            "anim": "singDOWN",
+            "pos": [-1245, -106]
+        },
+        {
+            "anim": "singUP",
+            "pos": [-1360, 31]
+        },
+        {
+            "anim": "singRIGHT",
+            "pos": [-1399, 11]
+        },
+        {
+            "anim": "bow",
+            "pos": [-1280, 23]
+        }
+    ]
+}

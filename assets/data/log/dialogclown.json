@@ -1,0 +1,112 @@
+{
+    "characters": ["clownami", "minami"],
+    "finisher": "song2",
+    "lines": [
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": ":)"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "Why did you bring me here?"
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": ";)"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "What"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "Can you like, speak words?"
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": ":P"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "…"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "I dont want to be here"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "Not to be mean or anything but i dont like this place"
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": ":?"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "I really don't like clowns. At all."
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "And there are just a billion other places i would rather be."
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": ":("
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "Now if you would, please tell the mime out front to let me leave"
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "*shrugs*"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "What do you mean *shrugs*"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "I need to leave"
+        },
+        {
+            "character": "narrator",
+            "frame": "neutral",
+            "text": "And little did our hero know, she wouldnt ever get to leave this place. Might as well stay confortable and rap a little.",
+            "voiceline": "37"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "Do you want to sing again? Thats it?"
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": ":3"
+        }, 
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "..."
+        }
+    ]
+}

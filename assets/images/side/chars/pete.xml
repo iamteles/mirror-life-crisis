@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="pete.png">
+	<!-- Created with Adobe Animate version 20.0.0.17400 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="skinny pete0000" x="34" y="34" width="103" height="324"/>
+	<SubTexture name="skinny pete0001" x="34" y="34" width="103" height="324"/>
+	<SubTexture name="skinny pete0002" x="34" y="34" width="103" height="324"/>
+	<SubTexture name="skinny pete0003" x="34" y="34" width="103" height="324"/>
+	<SubTexture name="skinny pete0004" x="34" y="34" width="103" height="324"/>
+	<SubTexture name="skinny pete0005" x="34" y="34" width="103" height="324"/>
+	<SubTexture name="skinny pete0006" x="34" y="34" width="103" height="324"/>
+	<SubTexture name="skinny pete0007" x="155" y="34" width="103" height="324"/>
+	<SubTexture name="skinny pete0008" x="155" y="34" width="103" height="324"/>
+	<SubTexture name="skinny pete0009" x="155" y="34" width="103" height="324"/>
+	<SubTexture name="skinny pete0010" x="155" y="34" width="103" height="324"/>
+	<SubTexture name="skinny pete0011" x="155" y="34" width="103" height="324"/>
+	<SubTexture name="skinny pete0012" x="155" y="34" width="103" height="324"/>
+	<SubTexture name="skinny pete0013" x="155" y="34" width="103" height="324"/>
+</TextureAtlas>

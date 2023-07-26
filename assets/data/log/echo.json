@@ -1,0 +1,89 @@
+{
+    "characters": ["clownami", "minami"],
+    "finisher": "introspection",
+    "lines": [
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": ":)"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "..."
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "Alright."
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "You've had your fun, and now its time for me to leave so i can go back to my normal life."
+        },
+        {
+            "character": "narrator",
+            "frame": "neutral",
+            "text": "Oh you have got to be kidding me.",
+            "voiceline": "40"
+        },
+        {
+            "character": "narrator",
+            "frame": "neutral",
+            "text": "What part of 'IM TRYING TO MAKE YOUR LIFE BETTER' do you not understand?",
+            "voiceline": "41"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "You're the one who's not understanding."
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "I don't want your help."
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "I don't NEED your help."
+        },
+        {
+            "character": "narrator",
+            "frame": "neutral",
+            "text": "*sighs*",
+            "voiceline": "42"
+        },
+        {
+            "character": "narrator",
+            "frame": "neutral",
+            "text": "Let me tell you something about fate.",
+            "voiceline": "43"
+        },
+        {
+            "character": "narrator",
+            "frame": "neutral",
+            "text": "FATE is something that I control.",
+            "voiceline": "44"
+        },
+        {
+            "character": "narrator",
+            "frame": "neutral",
+            "text": "And, unfortunatly I can't have you deviating from the path that I set for you.",
+            "voiceline": "45"
+        },
+        {
+            "character": "narrator",
+            "frame": "neutral",
+            "text": "I didn't want to come to this, but, it seems that if I wan't you to change...",
+            "voiceline": "46"
+        },
+        {
+            "character": "narrator",
+            "frame": "neutral",
+            "text": "I'll have to do it MYSELF.",
+            "voiceline": "47"
+        }
+    ]
+}

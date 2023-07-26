@@ -1,0 +1,42 @@
+{
+    "globalOffset": [-740, 320],
+    "cameraOffset": [-320, -150],
+    "offsets": [
+        {
+            "anim": "idle",
+            "pos": [-35, 270]
+        },
+        {
+            "anim": "singLEFT",
+            "pos": [84, 274]
+        },
+        {
+            "anim": "singDOWN",
+            "pos": [-89, 130]
+        },
+        {
+            "anim": "singUP",
+            "pos": [-7, 280]
+        },
+        {
+            "anim": "singRIGHT",
+            "pos": [-132, 204]
+        },
+        {
+            "anim": "singLEFTmiss",
+            "pos": [77, 271]
+        },
+        {
+            "anim": "singDOWNmiss",
+            "pos": [-89, 113]
+        },
+        {
+            "anim": "singUPmiss",
+            "pos": [-7, 279]
+        },
+        {
+            "anim": "singRIGHTmiss",
+            "pos": [-132, 200]
+        }
+    ]
+}

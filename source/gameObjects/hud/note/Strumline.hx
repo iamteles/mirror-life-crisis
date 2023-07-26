@@ -23,8 +23,11 @@ class Strumline extends FlxGroup
 
 	public var isPlayer:Bool = false;
 	public var botplay:Bool = false;
+	public var updatePls:Bool = false;
 
 	public var character:Character;
+	public var doSplash:Bool = true;
+	public var noteAlpha:Float = 1;
 
 	public function new(x:Float, ?character:Character, ?downscroll:Bool, ?isPlayer = false, ?botplay = true, ?assetModifier:String = "base")
 	{
@@ -60,10 +63,27 @@ class Strumline extends FlxGroup
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
+
+		if(updatePls) {
+			for(strum in strumGroup.members)
+			{
+				strum.x = x;
+				strum.x += NoteUtil.noteWidth() * strum.strumData;
+			}
+	
+			var lastStrum = strumGroup.members[strumGroup.members.length - 1];
+			var lineSize:Float = lastStrum.x + lastStrum.width - strumGroup.members[0].x;
+	
+			for(strum in strumGroup.members)
+			{
+				strum.x -= lineSize / 2;
+			}
+		}
 	}
 	
 	public function addNote(note:Note)
 	{
+		note.alpha = noteAlpha;
 		allNotes.add(note);
 		if(note.isHold)
 			holdGroup.add(note);
@@ -107,6 +127,7 @@ class Strumline extends FlxGroup
 
 	public function playSplash(note:Note)
 	{
+		if(!doSplash) return;
 		for(splash in splashGroup.members)
 		{
 			if(splash.assetModifier == note.assetModifier
@@ -143,4 +164,5 @@ class Strumline extends FlxGroup
 			strum.initialPos.set(strum.x, strum.y);
 		}
 	}
+
 }

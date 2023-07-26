@@ -17,6 +17,7 @@ typedef StageInfo =
 	var zoom:Null<Float>;
 	var dadData:Array<Float>;
 	var bfData:Array<Float>;
+	var gfData:Array<Float>;
 
 	var vgAlpha:Null<Float>;
 }
@@ -57,6 +58,7 @@ class Stage extends FlxGroup
 		{
 			
 			stageData = haxe.Json.parse(File.getContent('assets/data/stage/' + song + '.json').trim());
+			reloadStage(song);
 			loadFromJson();
 		}
 		catch (e)
@@ -80,6 +82,8 @@ class Stage extends FlxGroup
 			dadData = stageData.dadData;
 		if(stageData.bfData != null)
 			bfData = stageData.bfData;
+		if(stageData.gfData != null)
+			gfData = stageData.gfData;
 
 		if (stageData.objects != null)
 		{
@@ -154,23 +158,10 @@ class Stage extends FlxGroup
 		this.curStage = curStage;
 		switch(curStage)
 		{
+			case 'prismatic' | 'echo':
+				//
 			default:
-				this.curStage = "stage";
-				PlayState.defaultCamZoom = 0.7;
-
-				bfData = [850, 700, 0, 0];
-				dadData = [50, 700, 0, 0];
-
-				var bg = new FlxSprite(-600, -600).loadGraphic(Paths.image("backgrounds/stage/stageback"));
-				bg.scrollFactor.set(0.6,0.6);
-				add(bg);
-
-				var front = new FlxSprite(-580, 440).loadGraphic(Paths.image("backgrounds/stage/stagefront"));
-				add(front);
-
-				var curtains = new FlxSprite(-600, -400).loadGraphic(Paths.image("backgrounds/stage/stagecurtains"));
-				curtains.scrollFactor.set(1.4,1.4);
-				add(curtains);
+			//
 		}
 	}
 

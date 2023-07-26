@@ -1,0 +1,67 @@
+{
+    "zoom": 0.9,
+    "music": "clown",
+    "spawnPoint": [200, 200],
+    "retPoint": [1500, 200],
+    "boundaries": [40, -1000, 1800, 4000],
+    "camPos": [0, -230],
+    "objects": [
+        {
+            "objName": "sky",
+            "path": "side/levels/clownsky",
+            "position": [-200, -100],
+            "scale": 1,
+            "scrollFactor": [0.7, 0.7]
+        },
+        {
+            "objName": "park",
+            "path": "side/levels/park",
+            "position": [0, -100],
+            "scale": 1
+        },
+        {
+            "objName": "friend",
+            "path": "side/chars/juke",
+            "animations": [
+                {
+                    "name": "idle",
+                    "prefix": "c2",
+                    "framerate": 24,
+                    "looped": true
+                }
+            ],
+            "position": [700, 170],
+            "clickableCall": "dialogjuke"
+        },
+        {
+            "objName": "enemy",
+            "path": "side/chars/clownami",
+            "animations": [
+                {
+                    "name": "idle",
+                    "prefix": "Clownami",
+                    "framerate": 24,
+                    "looped": true
+                }
+            ],
+            "position": [1100, 190],
+            "clickableCall": "dialogclown"
+        }
+    ],
+    "warp": [
+        {
+            "wrpName": "goback",
+            "position": [0, 0],
+            "size": [1, 1000],
+            "location": "village",
+            "ret": true
+        },
+        {
+            "wrpName": "gotopark",
+            "position": [1900, 0],
+            "size": [1, 1000],
+            "location": "clownalley",
+            "ret": false
+        }
+    ]
+}

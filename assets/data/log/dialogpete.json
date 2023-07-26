@@ -1,0 +1,73 @@
+{
+    "characters": ["pete", "minami"],
+    "finisher": "progpete",
+    "lines": [
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "oh hi"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "Arent you kinda sad for a clown?"
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "oh"
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "no im just a mime"
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "mimes count as clowns too, around here"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "But arent mimes supposed to.."
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "Not speak?"
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "…",
+            "delay": 0.2
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "anyway im supposed to be guarding the gate to out of here",
+            "delay": 0.05
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "unfortunatly i cant let you out just yet…"
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "orders of the narrator"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "The… who?"
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "dont bother with that"
+        }
+    ]
+}

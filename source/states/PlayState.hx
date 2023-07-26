@@ -24,6 +24,7 @@ import gameObjects.*;
 import gameObjects.hud.*;
 import gameObjects.hud.note.*;
 import subStates.*;
+import states.othershit.*;
 import openfl.display.Shader;
 import openfl.display.GraphicsShader;
 import openfl.filters.ShaderFilter;
@@ -39,6 +40,8 @@ class PlayState extends MusicBeatState
 {
 	// song stuff
 	public static var SONG:SwagSong;
+	public static var isStory:Bool;
+	public static var diff:String = 'NORMAL';
 	public var inst:FlxSound;
 	public var vocals:FlxSound;
 	public var musicList:Array<FlxSound> = [];
@@ -55,12 +58,13 @@ class PlayState extends MusicBeatState
 	public var characters:Array<Character> = [];
 	public var dad:Character;
 	public var boyfriend:Character;
-	public var gf:Character;
+	public var juke:Character;
 
 	// strumlines
 	public var strumlines:FlxTypedGroup<Strumline>;
 	public var bfStrumline:Strumline;
 	public var dadStrumline:Strumline;
+	var strumPos:Array<Float> = [];
 
 	// hud
 	public var hudBuild:HudClass;
@@ -71,6 +75,7 @@ class PlayState extends MusicBeatState
 	public var camVignette:FlxCamera;
 	public var camOther:FlxCamera; // used so substates dont collide with camHUD.alpha or camHUD.visible
 	public static var defaultCamZoom:Float = 1.0;
+	var zoomAdd:Float = 0;
 
 	public var camFollow:FlxObject = new FlxObject();
 	public var charFollow:FlxObject = new FlxObject();
@@ -83,6 +88,11 @@ class PlayState extends MusicBeatState
 
 	var mustHit:Bool = true;
 	var vgblack:FlxSprite;
+	var vhs:FlxSprite;
+	var thetimesthattick:FlxSprite;
+
+	var prismaticisover:Bool = false;
+	var isflashback:Bool = false;
 
 	function resetStatics()
 	{
@@ -100,7 +110,7 @@ class PlayState extends MusicBeatState
 		resetStatics();
 
 		if(SONG == null)
-			SONG = SongData.loadFromJson("ugh");
+			SONG = SongData.loadFromJson("echo");
 
 		daSong = SONG.song.toLowerCase();
 
@@ -151,6 +161,23 @@ class PlayState extends MusicBeatState
 		boyfriend.setPosition(stageBuild.bfData[0], stageBuild.bfData[1]);
 		boyfriend.y -= boyfriend.height;
 
+		if(daSong == 'echo') {
+			juke = new Character();
+			juke.reloadChar("juke", true);
+			juke.setPosition(stageBuild.gfData[0], stageBuild.gfData[1]);
+			juke.y -= juke.height;
+
+			characters.push(juke);
+		}
+		else if(daSong == 'introspection') {
+			dad.reloadChar("boss", false);
+			boyfriend.reloadChar("minami-3b", true);
+			dad.reloadChar("narratorb", false);
+			boyfriend.reloadChar("minami-3c", true);
+			dad.reloadChar(SONG.player2, false);
+			boyfriend.reloadChar(SONG.player1, true);
+		}
+
 		characters.push(dad);
 		characters.push(boyfriend);
 
@@ -160,9 +187,7 @@ class PlayState extends MusicBeatState
 			char.y += char.globalOffset.y;
 		}
 
-		var addList:Array<FlxBasic> = [dad, boyfriend];
-
-		for(item in addList)
+		for(item in characters)
 			add(item);
 
 		add(stageBuild.foreground);
@@ -171,6 +196,27 @@ class PlayState extends MusicBeatState
 		camFollow.setPosition(charFollow.x, charFollow.y);
 		FlxG.camera.follow(camFollow, LOCKON, 1);
 		FlxG.camera.focusOn(camFollow.getPosition());
+
+		if(daSong == 'introspection') {
+			vhs = new FlxSprite();
+			vhs.frames = Paths.getSparrowAtlas("backgrounds/final/vhs");
+			vhs.animation.addByPrefix("idle", 'idle', 16, true);
+			vhs.animation.play('idle');
+			vhs.scale.set(3, 3);
+			vhs.updateHitbox();
+			vhs.screenCenter();
+			vhs.alpha = 0;
+			vhs.blend = LAYER;
+			vhs.cameras = [camHUD];
+			add(vhs);
+		}
+
+		var overlay = new FlxSprite(0, 0).loadGraphic(Paths.image("hud/overlays/" + SaveData.data.get("Mania Overlay")));
+		overlay.screenCenter();
+		overlay.cameras = [camHUD];
+		if(diff != 'MANIA')
+			overlay.alpha = 0;
+		add(overlay);
 
 		hudBuild = new HudClass();
 		hudBuild.cameras = [camHUD];
@@ -187,17 +233,32 @@ class PlayState extends MusicBeatState
 		strumlines.cameras = [camHUD];
 		add(strumlines);
 
+		if(daSong == 'introspection') {
+			thetimesthattick = new FlxSprite();
+			thetimesthattick.frames = Paths.getSparrowAtlas("hud/base/TIMESATICKIN");
+			thetimesthattick.animation.addByPrefix("idle", 'piece of paper', 16, false);
+			thetimesthattick.scale.set(0.5, 0.5);
+			thetimesthattick.updateHitbox();
+			thetimesthattick.screenCenter();
+			thetimesthattick.alpha = 0;
+			thetimesthattick.x += 270;
+			thetimesthattick.y += 270;
+			thetimesthattick.cameras = [camHUD];
+			add(thetimesthattick);
+		}
+
 		//strumline.scrollSpeed = 4.0; // 2.8
-		var strumPos:Array<Float> = [FlxG.width / 2, FlxG.width / 4];
+
+		strumPos = [FlxG.width / 2, FlxG.width / 4];
 		var posBF:Float;
 		var posOpp:Float;
-		if(daSong == 'prismatic') {
-			posBF = strumPos[0] - strumPos[1];
-			posOpp = strumPos[0] + strumPos[1];
-		}
-		else {
+		if(diff == 'MANIA') {
 			posBF = strumPos[0] + strumPos[1];
 			posOpp = strumPos[0] - strumPos[1];
+		}
+		else {
+			posBF = strumPos[0] - strumPos[1];
+			posOpp = strumPos[0] + strumPos[1];
 		}
 		var downscroll:Bool = SaveData.data.get("Downscroll");
 
@@ -209,9 +270,9 @@ class PlayState extends MusicBeatState
 		bfStrumline.ID = 1;
 		strumlines.add(bfStrumline);
 
-		if(SaveData.data.get("Middlescroll"))
+		if(diff == 'MANIA')
 		{
-			dadStrumline.x -= strumPos[0]; // goes offscreen
+			dadStrumline.x -= (strumPos[0] + 300); // goes offscreen
 			bfStrumline.x  -= strumPos[1]; // goes to the middle
 		}
 
@@ -362,18 +423,27 @@ class PlayState extends MusicBeatState
 			thisStrumline.unspawnNotes.push(note);
 		}
 
-		var antiFishLens:FlxRuntimeShader = new FlxRuntimeShader(File.getContent(Paths.shader('afl')));
-		FlxG.camera.setFilters([new ShaderFilter(antiFishLens)]);
+		if (SaveData.data.get('Shaders')) {
+			var antiFishLens:FlxRuntimeShader = new FlxRuntimeShader(File.getContent(Paths.shader('afl')));
+			FlxG.camera.setFilters([new ShaderFilter(antiFishLens)]);
+		}
 
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("Playing: " + SONG.song.toUpperCase().replace("-", " "), null);
 
 		switch(daSong) {
 			case 'prismatic':
-				vgblack.alpha = 0.4;
-				dad.alpha = 0;
-				camHUD.alpha = 0;
-				camGame.alpha = 0;
+				if(diff != 'MANIA') {
+					vgblack.alpha = 0.4;
+					dad.alpha = 0;
+					camHUD.alpha = 0;
+					FlxG.camera.fade(0x00000000, 0.1, false);
+				}
+			case 'echo' | 'introspection':
+				if(diff != 'MANIA') {
+					camHUD.alpha = 0;
+					FlxG.camera.fade(0x00000000, 0.1, false);
+				}
 		}
 
 		startCountdown();
@@ -484,6 +554,7 @@ class PlayState extends MusicBeatState
 		if(miss) {
 			health -= 0.5;
 			judge = Timings.timingsMap.get('miss')[1];
+			FlxG.sound.play(Paths.sound('miss_' + FlxG.random.int(1, 3)));
 		}
 		else {
 			health += 0.5;
@@ -505,7 +576,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-
+		hudBuild.updateText();
 	}
 
 	// if youre holding a note
@@ -524,15 +595,10 @@ class PlayState extends MusicBeatState
 		if(Controls.justPressed("RESET"))
 			startGameOver();
 
-		/*if(FlxG.keys.justPressed.SPACE)
+		if(FlxG.keys.justPressed.ONE)
 		{
-			for(strumline in strumlines.members)
-			{
-				strumline.downscroll = !strumline.downscroll;
-				strumline.updateHitbox();
-			}
-			hudBuild.updateHitbox(bfStrumline.downscroll);
-		}*/
+			endSong();
+		}
 
 		//strumline.scrollSpeed = 2.8 + Math.sin(FlxG.game.ticks / 500) * 1.5;
 
@@ -682,6 +748,8 @@ class PlayState extends MusicBeatState
 					{
 						hold.x = holdParent.x;
 						hold.y = holdParent.y + (strumline.downscroll ? 0 : holdParent.height) + (-downMult * 0.5);
+
+						hold.y -= 5 * hold.scrollSpeed * downMult;
 					}
 
 					if(strumline.downscroll)
@@ -870,6 +938,8 @@ class PlayState extends MusicBeatState
 				mustHit = curSection.mustHitSection;
 
 			if(mustHit) {
+				if(daSong == 'introspection' && !isflashback)
+					defaultCamZoom = 0.8;
 				followCamera(boyfriend);
 				switch (boyfriend.animation.curAnim.name)
 				{
@@ -892,6 +962,8 @@ class PlayState extends MusicBeatState
 			}
 
 			else {
+				if(daSong == 'introspection' && !isflashback)
+					defaultCamZoom = 0.5;
 				followCamera(dad);
 				switch (dad.animation.curAnim.name)
 				{
@@ -922,7 +994,7 @@ class PlayState extends MusicBeatState
 			startGameOver();
 		}
 
-		camGame.zoom = FlxMath.lerp(camGame.zoom, defaultCamZoom, elapsed * 6);
+		camGame.zoom = FlxMath.lerp(camGame.zoom, defaultCamZoom + zoomAdd, elapsed * 6);
 		camHUD.zoom  = FlxMath.lerp(camHUD.zoom,  1.0, elapsed * 6);
 
 		health = FlxMath.bound(health, 0, 5); // bounds the health
@@ -957,6 +1029,7 @@ class PlayState extends MusicBeatState
 		{
 			camGame.zoom += 0.05;
 			camHUD.zoom += 0.025;
+			Utils.bang(camVignette, 0.5);
 		}
 		if(curBeat % 2 == 0)
 		{
@@ -970,8 +1043,11 @@ class PlayState extends MusicBeatState
 						canIdle = false;
 				}
 
-				if(canIdle)
-					char.dance();
+				if(!prismaticisover) {
+					if(canIdle)
+						char.dance();
+				}
+
 			}
 		}
 	}
@@ -981,36 +1057,239 @@ class PlayState extends MusicBeatState
 		super.stepHit();
 		syncSong();
 
-		hudBuild.updateText(curStep);
+		if(diff != 'MANIA') {
+			switch (daSong) {
+				case 'introspection':
+					switch (curStep) {
+						case 1:
+							FlxTween.tween(camHUD, {alpha: 1}, 2, {ease: FlxEase.sineInOut});
+						case 48:
+							FlxG.camera.fade(0x00000000, 4, true);
+						case 256:
+							Utils.flash(camHUD);
+							zoomAdd = 0.1;
+						case 478:
+							zoomAdd = 0.15;
+						case 486:
+							zoomAdd = 0.2;
+						case 494:
+							zoomAdd = 0.1;
+						case 640:
+							Utils.flash(camHUD);
+							zoomAdd = 0;
+						case 704:
+							Utils.flash(camHUD);
+							zoomAdd = 0.1;
+						case 960:
+							zoomAdd = 0.13;
+						case 1024:
+							Utils.flash(camHUD);
+							zoomAdd = 0;
+						case 1280: // 1280
+							FlxG.camera.fade(0x00000000, 0.5, false);
+							thetimesthattick.alpha = 1;
+							thetimesthattick.animation.play('idle');
+							var noteTimer = new FlxTimer().start(2, function(tmr:FlxTimer)
+							{
+								FlxTween.tween(thetimesthattick, {alpha: 0}, 0.5, {ease: FlxEase.sineInOut});
+							});
+						// 1284 - time, 1288 - is, 1292, - ticking, 1297 - minami, 1301 - char change
+						case 1301: //1301
+							dad.reloadChar("boss", false);
+							boyfriend.reloadChar("minami-3b", true);
+							stageBuild.objectMap.get("office").alpha = 1;
+							FlxTween.tween(vhs, {alpha: 0.5}, 1, {ease: FlxEase.sineInOut});
+							isflashback = true;
+							defaultCamZoom = 0.6;
 
-		switch (daSong) {
-			case 'prismatic':
-				switch(curStep) {
-					case 1:
-						FlxTween.tween(camGame, {alpha: 1}, 7, {ease: FlxEase.sineInOut});
-					case 200 | 338 | 471 | 739 | 1009:
-						mustHit = false;
-					case 136 | 269 | 406 | 537 | 944 | 1075:
-						mustHit = true;
-					case 67:
-						// enter clown minami
-						FlxTween.tween(camHUD, {alpha: 1}, 2, {ease: FlxEase.sineInOut});
-						Utils.flash(camVignette);
-						dad.alpha = 1;
-						defaultCamZoom = 0.67;
-					case 605:
-						defaultCamZoom = 0.77;
-						Utils.flash(camHUD);
-					case 874:
-						defaultCamZoom = 0.67;
-						Utils.flash(camHUD);
-					case 1213:
-						FlxTween.tween(camHUD, {alpha: 0}, 5, {ease: FlxEase.sineInOut});
-						mustHit = false;
-					case 1304:
-						//bow down
-						dad.playAnim('bow', true);
-				}
+							dad.setPosition(stageBuild.dadData[0], stageBuild.dadData[1]);
+							boyfriend.setPosition(stageBuild.bfData[0], stageBuild.bfData[1]);
+					
+							for(char in characters)
+							{
+								char.x += char.globalOffset.x;
+								char.y += char.globalOffset.y;
+							}
+						case 1312:
+							Utils.flash(camHUD);
+							FlxG.camera.fade(0x00000000, 0.1, true);
+						case 1696: //1696
+							//char change back
+							Utils.flash(camHUD);
+							
+							vhs.alpha = 0;
+
+							dad.reloadChar("narratorb", false);
+							boyfriend.reloadChar("minami-3c", true);
+
+							dad.setPosition(stageBuild.dadData[0], stageBuild.dadData[1]);
+							boyfriend.setPosition(stageBuild.bfData[0], stageBuild.bfData[1]);
+
+							for(char in characters)
+							{
+								char.x += char.globalOffset.x;
+								char.y += char.globalOffset.y;
+							}
+							stageBuild.objectMap.get("office").alpha = 0;
+							stageBuild.objectMap.get("sky").alpha = 0;
+							stageBuild.objectMap.get("sun").alpha = 0;
+							isflashback = false;
+						case 1952:
+							Utils.flash(camHUD);
+							zoomAdd = 0.1;
+						case 2096:
+							Utils.flash(camHUD);
+							zoomAdd = 0;
+						case 2336:
+							FlxTween.tween(camHUD, {alpha: 0}, 1, {ease: FlxEase.sineInOut});
+							FlxG.camera.fade(0x00000000, 1, false);
+					}
+				case 'echo':
+					switch (curStep) {
+						case 16:
+							FlxG.camera.fade(0x00000000, 7, true);
+						case 272:
+							FlxTween.tween(camHUD, {alpha: 1}, 5, {ease: FlxEase.sineInOut});
+						case 528:
+							Utils.flash(camHUD);
+							defaultCamZoom = 0.73;
+							for (strum in strumlines) {
+								//strum.scrollSpeed = 3.3;
+
+								FlxTween.tween(strum, {scrollSpeed: 3.3}, 0.4, {ease: FlxEase.linear});
+							}
+						case 784:
+							Utils.flash(camHUD);
+							defaultCamZoom = 0.8;
+						case 912:
+							defaultCamZoom = 0.67;
+						case 976:
+							Utils.flash(camHUD);
+							defaultCamZoom = 0.73;
+						case 1232:
+							defaultCamZoom = 0.6;
+						case 1238:
+							defaultCamZoom = 0.8;
+						case 1244:
+							defaultCamZoom = 0.7;
+						case 1360:
+							defaultCamZoom = 0.6;
+						case 1442:
+							FlxG.camera.fade(0x00000000, 3, false);
+						case 1552:
+							FlxG.camera.fade(0x00000000, 4, true);
+						case 1680:
+							defaultCamZoom = 0.73;
+						case 1808:
+							defaultCamZoom = 0.86;
+						case 1872: //1872
+							// shader and middlescroll
+							Utils.flash(camHUD);
+
+							if(SaveData.data.get("Shaders")) {
+								var epicShader:FlxRuntimeShader = new FlxRuntimeShader('
+								#pragma header
+								vec2 uv = openfl_TextureCoordv.xy;
+								vec2 fragCoord = openfl_TextureCoordv*openfl_TextureSize;
+								vec2 iResolution = openfl_TextureSize;
+								uniform float iTime;
+								#define iChannel0 bitmap
+								#define texture flixel_texture2D
+								#define fragColor gl_FragColor
+								#define mainImage main
+								
+								int sampleCount = 50;
+								float blur = 0.25; 
+								float falloff = 3.0; 
+								
+								// use iChannel0 for video, iChannel1 for test grid
+								#define INPUT iChannel0
+								
+								void mainImage()
+								{
+									vec2 destCoord = fragCoord.xy / iResolution.xy;
+								
+									vec2 direction = normalize(destCoord - 0.5); 
+									vec2 velocity = direction * blur * pow(length(destCoord - 0.5), falloff);
+									float inverseSampleCount = 1.0 / float(sampleCount); 
+									
+									mat3x2 increments = mat3x2(velocity * 1.0 * inverseSampleCount,
+															   velocity * 2.0 * inverseSampleCount,
+															   velocity * 4.0 * inverseSampleCount);
+								
+									vec3 accumulator = vec3(0);
+									mat3x2 offsets = mat3x2(0); 
+									
+									for (int i = 0; i < sampleCount; i++) {
+										accumulator.r += texture(INPUT, destCoord + offsets[0]).r; 
+										accumulator.g += texture(INPUT, destCoord + offsets[1]).g; 
+										accumulator.b += texture(INPUT, destCoord + offsets[2]).b; 
+										
+										offsets -= increments;
+									}
+								
+									fragColor = vec4(accumulator / float(sampleCount), 1.0);
+								}'); // lmao?
+								FlxG.camera.setFilters([new ShaderFilter(epicShader)]);
+							}
+							defaultCamZoom = 0.66;
+							
+							dadStrumline.doSplash = false;
+
+							for (strum in strumlines) {
+								//strum.scrollSpeed = 3.3;
+								strum.updatePls = true;
+								FlxTween.tween(strum, {x: strumPos[0]}, 1, {ease: FlxEase.circInOut, onComplete: function(twn:FlxTween)
+								{
+									strum.updatePls = false;
+								}});
+							}
+
+							for (thing in dadStrumline.strumGroup) {
+								FlxTween.tween(thing, {alpha: 0}, 1, {ease: FlxEase.circOut});
+							}
+
+							for (thing in dadStrumline.allNotes) {
+								FlxTween.tween(thing, {alpha: 0.14}, 1, {ease: FlxEase.circOut});
+							}
+							dadStrumline.noteAlpha = 0.14;
+						case 2384:
+							Utils.flash(camHUD);
+							FlxTween.tween(camHUD, {alpha: 0}, 6, {ease: FlxEase.sineInOut});
+							FlxG.camera.setFilters([]);
+						case 2640:
+							FlxG.camera.fade(0x00000000, 4, false);
+						}
+				case 'prismatic':
+					switch(curStep) {
+						case 1:
+							FlxG.camera.fade(0x00000000, 7, true);
+						case 200 | 338 | 471 | 739 | 1009:
+							mustHit = false;
+						case 136 | 269 | 406 | 537 | 944 | 1075:
+							mustHit = true;
+						case 67:
+							// enter clown minami
+							FlxTween.tween(camHUD, {alpha: 1}, 2, {ease: FlxEase.sineInOut});
+							Utils.flash(camVignette);
+							dad.alpha = 1;
+							defaultCamZoom = 0.67;
+							mustHit = false;
+						case 605:
+							defaultCamZoom = 0.77;
+							Utils.flash(camHUD);
+						case 874:
+							defaultCamZoom = 0.67;
+							Utils.flash(camHUD);
+						case 1213:
+							FlxTween.tween(camHUD, {alpha: 0}, 5, {ease: FlxEase.sineInOut});
+							mustHit = false;
+						case 1304: //1304
+							//bow down
+							dad.playAnim('bow', true);
+							prismaticisover = true;
+					}
+			}
 		}
 	}
 
@@ -1051,7 +1330,47 @@ class PlayState extends MusicBeatState
 
 		if(Conductor.songPos >= smallerLength)
 		{
-			Main.switchState(new MenuState());
+			endSong();
+		}
+	}
+
+	function endSong() {
+		Highscore.addScore(daSong + diff, {
+			score: 		Timings.score,
+			accuracy: 	Timings.accuracy,
+			misses: 	Timings.misses,
+		});
+
+		switch (daSong) {
+			case 'prismatic':
+				if(isStory) {
+					Main.switchState(new SideState());
+					SideState.lvlId = 'village';
+				}
+				else {
+					Main.switchState(new SideState());
+					SideState.lvlId = 'park';
+				}
+			case 'echo':
+				if(isStory) {
+					Main.switchState(new SideState());
+					SideState.lvlId = 'park';
+					SaveData.progress(4);
+				}
+				else {
+					Main.switchState(new SideState());
+					SideState.lvlId = 'park';
+				}
+			case 'introspection':
+				if(isStory) {
+					Main.switchState(new Ending());
+				}
+				else {
+					Main.switchState(new SideState());
+					SideState.lvlId = 'park';
+				}
+			default:
+				Main.switchState(new MenuState());
 		}
 	}
 

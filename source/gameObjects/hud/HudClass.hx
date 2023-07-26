@@ -21,10 +21,16 @@ class HudClass extends FlxGroup
 	// icon stuff
 	public var iconBf:HealthIcon;
 	var downscroll:Bool = false;
+	var glass:FlxSprite;
 
 	public function new() 
 	{
 		super();
+
+		glass = new FlxSprite(0, 0).loadGraphic(Paths.image("hud/base/glass"));
+		glass.alpha = 0;
+		glass.screenCenter();
+		add(glass);
 
 		downscroll = SaveData.data.get("Downscroll");
 		healthBar = new FlxSprite();
@@ -51,7 +57,7 @@ class HudClass extends FlxGroup
 			iconBf.y = healthBar.y;
 		add(iconBf);
 
-		infoTxt = new FlxText(0, 0, 0, "nothing");
+		infoTxt = new FlxText(0, 0, 0, "");
 		infoTxt.setFormat(Main.gFont, 18, 0xFFFFFFFF);
 		infoTxt.setBorderStyle(OUTLINE, FlxColor.BLACK, 1.5);
 		add(infoTxt);
@@ -62,30 +68,31 @@ class HudClass extends FlxGroup
 	
 	public final separator:String = " || ";
 
-	public function updateText(step:Int)
+	public function updateText()
 	{
-		infoTxt.text = Std.string(step);
-
-		/*
+		infoTxt.text = '';
 		infoTxt.text += 			'Score: '		+ Timings.score;
-		infoTxt.text += separator + 'Accuracy: '	+ Timings.accuracy + "%" + ' [${Timings.getRank()}]';
-		infoTxt.text += separator + 'Misses: '		+ Timings.misses;
-		*/
+		infoTxt.text += separator + 'Accuracy: '	+ Timings.accuracy + "%";
+		infoTxt.text += separator + 'Breaks: '		+ Timings.misses;
 
 		infoTxt.screenCenter(X);
+		infoTxt.x -= 135;
+		if(downscroll)
+			infoTxt.y = healthBar.y + 80;
+		else
+			infoTxt.y = healthBar.y + 70;
 	}
 
 	public function updateHitbox(downscroll:Bool = false)
 	{
-		updateText(0);
-		infoTxt.screenCenter(X);
-		infoTxt.y = (downscroll ? 50 : FlxG.height - 30 - 50) + 30;
+		updateText();
 	}
 
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
 		healthBar.animation.play(Std.string(Std.int(PlayState.health)));
+		glass.alpha = ((8 - (PlayState.health*2))/8);
 		updateIconPos();
 	}
 

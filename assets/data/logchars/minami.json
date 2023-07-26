@@ -1,0 +1,19 @@
+{
+    "name": "Minami",
+    "pos": [140, -140],
+    "scale": 1.4,
+    "frames": [
+        {
+            "expression": "neutral",
+            "offset": [0, 0],
+            "flipped": [true, false],
+            "semiscale": 1
+        },
+        {
+            "expression": "angry",
+            "offset": [0, 0],
+            "flipped": [true, false],
+            "semiscale": 1
+        }
+    ]
+}

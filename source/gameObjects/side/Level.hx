@@ -1,5 +1,6 @@
 package gameObjects.side;
 
+import lime.graphics.opengl.GLTransformFeedback;
 import flixel.FlxBasic;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -20,6 +21,7 @@ typedef LevelInfo =
 
 	var zoom:Float;
 	var spawnPoint:Array<Int>;
+	var retPoint:Array<Int>;
 	var boundaries:Null<Array<Int>>;
 	var camPos:Null<Array<Int>>;
 	var music:Null<String>;
@@ -29,12 +31,21 @@ typedef LevelObject =
 {
 	var objName:Null<String>; // for the var/object name
 	var path:Null<String>; // image path
+	var animations:Null<Array<Animation>>;
 	var position:Null<Array<Float>>; // position of the object
 	var flipped:Null<Array<Bool>>; // whether object is flipped, on the X or Y axis
 	var scale:Null<Float>; // sizer for object
 	var alpha:Null<Float>; // alpha
 	var clickableCall:Null<String>; // what will happen when you click said object. if null will not be clickable
 	var scrollFactor:Null<Array<Int>>; // self explanatory i hope
+}
+
+typedef Animation =
+{
+	var name:String;
+	var prefix:String;
+	var framerate:Int;
+	var looped:Bool;
 }
 
 typedef Hitbox =
@@ -51,6 +62,7 @@ typedef Warp =
 	var position:Null<Array<Float>>; // INITIAL position of the warp
 	var size:Null<Array<Int>>; // size of the warp square
 	var location:Null<String>; // where to warp to
+	var ret:Null<Bool>;
 }
 
 class Level extends FlxTypedGroup<FlxBasic>
@@ -61,6 +73,7 @@ class Level extends FlxTypedGroup<FlxBasic>
 
 	public var zoom:Float;
 	public var spawnPoint:Array<Int>;
+	public var retPoint:Array<Int>;
 	
 	public var objectMap:Map<String, FlxSprite> = new Map<String, FlxSprite>();
 	public var clickableMap:Map<String, Array<Dynamic>> = new Map<String, Array<Dynamic>>();
@@ -109,6 +122,7 @@ class Level extends FlxTypedGroup<FlxBasic>
 
 		zoom = lvlData.zoom;
 		spawnPoint = lvlData.spawnPoint;
+		retPoint = lvlData.retPoint;
 		if(lvlData.boundaries != null)
 			boundaries = lvlData.boundaries;
 		if(lvlData.camPos != null)
@@ -119,7 +133,17 @@ class Level extends FlxTypedGroup<FlxBasic>
 			for (object in lvlData.objects)
 			{
 				var newSpr:FlxSprite = new FlxSprite(object.position[0], object.position[1]);
-				newSpr.loadGraphic(Paths.image(object.path));
+
+				if(object.animations != null) {
+					newSpr.frames = Paths.getSparrowAtlas(object.path);
+					for (anim in object.animations) {
+						newSpr.animation.addByPrefix(anim.name, anim.prefix, anim.framerate, anim.looped);
+					}
+					newSpr.animation.play('idle');
+				}
+				else {
+					newSpr.loadGraphic(Paths.image(object.path));
+				}
 
 				if (object.scale != null)
 				{
@@ -212,7 +236,7 @@ class Level extends FlxTypedGroup<FlxBasic>
 				newWarp.makeGraphic(warp.size[0], warp.size[1], 0xFF0066FF);
 				newWarp.visible = false;
 
-				warpMap.set(warp.wrpName, [newWarp, warp.location]);
+				warpMap.set(warp.wrpName, [newWarp, warp.location, warp.ret]);
 				warpLayer.add(newWarp);
 			}
 		}

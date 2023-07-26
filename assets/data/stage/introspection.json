@@ -1,0 +1,59 @@
+{
+    "zoom": 0.6,
+    "bfData": [-160, 60, 200, -200],
+    "dadData": [-560, 0, -200, -180],
+    "gfData": [0, 0, 0, 0],
+    "objects": [
+        {
+            "objName": "moon",
+            "path": "backgrounds/final/moon",
+            "position": [-500, -200],
+            "scrollFactor": [0.6, 0.6],
+            "scale": 1.1
+        },
+        {
+            "objName": "skyNIGHT",
+            "path": "backgrounds/final/night",
+            "position": [-700, -1080],
+            "scrollFactor": [0.5, 0.5],
+            "scale": 1.5
+        },
+        {
+            "objName": "stars",
+            "path": "backgrounds/final/stars",
+            "position": [-700, -1080],
+            "scrollFactor": [0.55, 0.55],
+            "scale": 1.5
+        },
+        {
+            "objName": "sky",
+            "path": "backgrounds/final/sunset",
+            "position": [-700, -1080],
+            "scrollFactor": [0.5, 0.5],
+            "scale": 1.5
+        },
+        {
+            "objName": "sun",
+            "path": "backgrounds/final/sun",
+            "position": [-500, -200],
+            "scrollFactor": [0.6, 0.6],
+            "scale": 1.1
+        },
+
+        {
+            "objName": "clouds",
+            "path": "backgrounds/final/clouds",
+            "position": [-880, -1040],
+            "scrollFactor": [0.7, 0.7],
+            "scale": 1.3
+        },
+        {
+            "objName": "office",
+            "path": "backgrounds/final/office",
+            "position": [-880, -1040],
+            "scrollFactor": [1, 1],
+            "alpha": 0,
+            "scale": 1
+        }
+    ]
+}

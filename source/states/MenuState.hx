@@ -20,6 +20,7 @@ import flixel.input.keyboard.FlxKey;
 import data.GameData.MusicBeatState;
 import data.Conductor;
 import data.GameData.Utils;
+import states.othershit.*;
 
 using StringTools;
 
@@ -33,13 +34,14 @@ class MenuState extends MusicBeatState
 	var left:FlxSprite;
 	var right:FlxSprite;
 	var logo:FlxSprite;
+	var accepted:Bool = false;
 	override function create()
 	{
 		super.create();
 
 		if(FlxG.sound.music == null) {
 			FlxG.sound.playMusic(Paths.music('menu'), 1);
-			Conductor.setBPM(280);
+			Conductor.setBPM(260);
 		}
 
 		Utils.flash(FlxG.camera, 0.5);
@@ -122,19 +124,32 @@ class MenuState extends MusicBeatState
 		else
 			right.animation.play("idle");
 
-		if(Controls.justPressed("ACCEPT"))
+		if(Controls.justPressed("ACCEPT") && !accepted)
 		{
+			accepted = true;
 			itemGroup.forEach(function(spr:FlxSprite)
 			{
 				FlxFlicker.flicker(spr, 1, 0.06, false, false, function(flick:FlxFlicker)
 				{
 					switch(itemListing[curSelected]) {
 						case 'Play':
-							SideState.lvlId = 'street';
-							Main.switchState(new SideState());
+							if(SaveData.progression <= 2)
+								Main.switchState(new Intro());
+							else {
+								SideState.lvlId = 'park';
+								Main.switchState(new SideState());
+							}
+
 							FlxG.sound.music.volume = 0;
 						case 'Credits':
-							Main.switchState(new DebugState());
+							trace(SaveData.data.get('Munchlog'));
+							if(SaveData.data.get('Munchlog') == 398) {
+								Main.switchState(new DebugState());
+								FlxG.sound.music.volume = 0;
+							}
+							else {
+								Main.switchState(new Credits());
+							}
 						case 'Settings':
 							Main.switchState(new states.menu.OptionsState());
 					}
@@ -147,6 +162,7 @@ class MenuState extends MusicBeatState
 
 	public function changeSelection(change:Int = 0)
 	{
+		if(accepted) return;
 		curSelected += change;
 		curSelected = FlxMath.wrap(curSelected, 0, itemListing.length - 1);
 

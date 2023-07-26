@@ -14,6 +14,7 @@ import sys.FileSystem;
 import sys.io.File;
 import openfl.Lib;
 import data.Discord.DiscordClient;
+import flixel.util.FlxSave;
 
 using StringTools;
 
@@ -39,6 +40,7 @@ class Main extends Sprite
 
 		#if desktop
 		fpsVar = new FPSCounter(10, 3, 0xFFFFFF);
+		fpsVar.visible = false;
 		addChild(fpsVar);
 		#end
 	}

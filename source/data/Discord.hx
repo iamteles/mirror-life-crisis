@@ -15,7 +15,7 @@ class DiscordClient
 		#if DISCORD_RPC
 		trace("Discord Client starting...");
 		DiscordRpc.start({
-			clientID: "1125409482101493823",
+			clientID: "1132270314349412372",
 			onReady: onReady,
 			onError: onError,
 			onDisconnected: onDisconnected
@@ -47,7 +47,7 @@ class DiscordClient
 			details: "In the Menus",
 			state: null,
 			largeImageKey: 'icon',
-			largeImageText: "Doido Engine"
+			largeImageText: "Mirror Life Crisis"
 		});
 		#end
 	}

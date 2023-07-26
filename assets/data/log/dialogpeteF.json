@@ -1,0 +1,61 @@
+{
+    "characters": ["pete", "minami"],
+    "finisher": "",
+    "lines": [
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "apparently im supposed to say new things now that youve finished the mod"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "Right."
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "so"
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "they dont want you to know this"
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "but the munchlog option actually does something"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "..."
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "theres a specific value you have to set it to"
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "and you can open a secret debug menu"
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "i dont know what that value is though"
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "so you will have to find it yourself"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "I see."
+        }
+    ]
+}

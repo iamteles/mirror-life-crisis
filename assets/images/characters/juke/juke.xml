@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="juke.png">
+	<!-- Created with Adobe Animate version 20.0.0.17400 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="jukebox idle0000" x="1064" y="604" width="500" height="550" frameX="-5" frameY="-14" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0001" x="1064" y="604" width="500" height="550" frameX="-5" frameY="-14" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0002" x="1587" y="1176" width="496" height="545" frameX="-7" frameY="-19" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0003" x="1587" y="1176" width="496" height="545" frameX="-7" frameY="-19" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0004" x="34" y="1171" width="510" height="537" frameX="0" frameY="-27" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0005" x="34" y="1171" width="510" height="537" frameX="0" frameY="-27" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0006" x="2101" y="1176" width="504" height="535" frameX="-3" frameY="-29" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0007" x="2101" y="1176" width="504" height="535" frameX="-3" frameY="-29" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0008" x="1067" y="1172" width="502" height="544" frameX="-4" frameY="-20" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0009" x="1067" y="1172" width="502" height="544" frameX="-4" frameY="-20" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0010" x="34" y="605" width="500" height="548" frameX="-5" frameY="-16" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0011" x="34" y="605" width="500" height="548" frameX="-5" frameY="-16" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0012" x="1582" y="604" width="500" height="550" frameX="-5" frameY="-14" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0013" x="1582" y="604" width="500" height="550" frameX="-5" frameY="-14" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0014" x="1582" y="604" width="500" height="550" frameX="-5" frameY="-14" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0015" x="1064" y="34" width="500" height="552" frameX="-5" frameY="-12" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0016" x="1064" y="34" width="500" height="552" frameX="-5" frameY="-12" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0017" x="34" y="34" width="503" height="553" frameX="-4" frameY="-11" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0018" x="34" y="34" width="503" height="553" frameX="-4" frameY="-11" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0019" x="555" y="34" width="491" height="564" frameX="-9" frameY="0" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0020" x="555" y="34" width="491" height="564" frameX="-9" frameY="0" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0021" x="562" y="1172" width="487" height="562" frameX="-11" frameY="-2" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0022" x="562" y="1172" width="487" height="562" frameX="-11" frameY="-2" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0023" x="2100" y="603" width="496" height="555" frameX="-7" frameY="-9" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0024" x="2100" y="603" width="496" height="555" frameX="-7" frameY="-9" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0025" x="1582" y="34" width="500" height="552" frameX="-5" frameY="-12" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0026" x="1582" y="34" width="500" height="552" frameX="-5" frameY="-12" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0027" x="2100" y="34" width="500" height="551" frameX="-5" frameY="-13" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0028" x="2100" y="34" width="500" height="551" frameX="-5" frameY="-13" frameWidth="510" frameHeight="564"/>
+	<SubTexture name="jukebox idle0029" x="2100" y="34" width="500" height="551" frameX="-5" frameY="-13" frameWidth="510" frameHeight="564"/>
+</TextureAtlas>

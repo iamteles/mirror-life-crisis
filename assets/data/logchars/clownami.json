@@ -1,0 +1,13 @@
+{
+    "name": "Clownami",
+    "pos": [-350, -160],
+    "flipped": [false, false],
+    "scale": 1.4,
+    "frames": [
+        {
+            "expression": "neutral",
+            "offset": [0, 0],
+            "semiscale": 1
+        }
+    ]
+}

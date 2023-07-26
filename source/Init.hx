@@ -12,7 +12,7 @@ class Init extends MusicBeatState
 	{
 		super.create();
 		SaveData.init();
-				
+		SaveData.update();
 		FlxG.fixedTimestep = false;
 		FlxG.mouse.useSystemCursor = true;
 		//FlxG.mouse.visible = false;

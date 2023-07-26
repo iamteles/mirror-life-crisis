@@ -1,0 +1,53 @@
+{
+    "zoom": 0.9,
+    "music": "clown",
+    "spawnPoint": [200, 200],
+    "retPoint": [1500, 200],
+    "boundaries": [40, -1000, 1800, 4000],
+    "camPos": [0, -230],
+    "objects": [
+        {
+            "objName": "sky",
+            "path": "side/levels/clownsky",
+            "position": [-200, -100],
+            "scale": 1,
+            "scrollFactor": [0.7, 0.7]
+        },
+        {
+            "objName": "village",
+            "path": "side/levels/village",
+            "position": [0, 0],
+            "scale": 1
+        },
+        {
+            "objName": "friend",
+            "path": "side/chars/lexi",
+            "animations": [
+                {
+                    "name": "idle",
+                    "prefix": "C1",
+                    "framerate": 24,
+                    "looped": true
+                }
+            ],
+            "position": [570, 160],
+            "clickableCall": "dialogc1"
+        }
+    ],
+    "hitboxes": [
+        {
+            "hbxName": "left",
+            "position": [50, 0],
+            "size": [1, 1000]
+        }
+    ],
+    "warp": [
+        {
+            "wrpName": "gotopark",
+            "position": [1900, 0],
+            "size": [1, 1000],
+            "location": "park",
+            "ret": false
+        }
+    ]
+}

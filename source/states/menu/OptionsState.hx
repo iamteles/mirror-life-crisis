@@ -8,6 +8,7 @@ import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import flixel.addons.display.FlxBackdrop;
 import data.GameData.MusicBeatState;
 import gameObjects.menu.AlphabetMenu;
 import gameObjects.menu.options.*;
@@ -19,19 +20,23 @@ class OptionsState extends MusicBeatState
 	[
 		"main" => [
 			"Gameplay",
-			"Appearence",
+			"Appearance",
 			"Controls",
 		],
 		"Gameplay" => [
 			"Ghost Tapping",
 			"Downscroll",
-			"Middlescroll",
+			"Flashbang Mode",
 			"Framerate",
+			"Munchlog"
 		],
-		"Appearence" => [
+		"Appearance" => [
+			"FPS Counter",
+			"Flashing Lights",
+			"Shaders",
 			"Antialiasing",
 			"Note Splashes",
-			"Ratings on HUD",
+			"Mania Overlay"
 		],
 	];
 
@@ -51,7 +56,7 @@ class OptionsState extends MusicBeatState
 	var grpAttachs:FlxTypedGroup<FlxBasic>;
 
 	// objects
-	var bg:FlxSprite;
+	var bg:FlxBackdrop;
 
 	// makes you able to go to the options and go back to the state you were before
 	var backTarget:FlxState;
@@ -65,10 +70,11 @@ class OptionsState extends MusicBeatState
 	override function create()
 	{
 		super.create();
-		bg = new FlxSprite().loadGraphic(Paths.image('menu/backgrounds/menuDesat'));
-		bg.scale.set(1.2,1.2); bg.updateHitbox();
-		bg.screenCenter();
-		add(bg);
+
+		bg = new FlxBackdrop(Paths.image("menu/grid"), XY, 0, 0);
+        bg.velocity.set(FlxG.random.bool(50) ? 90 : -90, FlxG.random.bool(50) ? 90 : -90);
+       	bg.screenCenter();
+        add(bg);
 
 		grpTexts = new FlxTypedGroup<AlphabetMenu>();
 		grpAttachs = new FlxTypedGroup<FlxBasic>();
@@ -317,6 +323,12 @@ class OptionsState extends MusicBeatState
 		
 		if(Controls.pressed("UI_LEFT") || Controls.pressed("UI_RIGHT"))
 		{
+			if(curCat == 'Gameplay' && curSelected == 4 && !SaveData.clowns.get('munchlog')) {
+				FlxG.sound.music.volume = 0.3;
+				FlxG.sound.play(Paths.sound("lines/munchlog extraordinaire"));
+				SaveData.clowns.set('munchlog', true);
+				SaveData.saveButTechnically();
+			}
 			var curAttach = grpAttachs.members[curSelected];
 			if(Std.isOfType(curAttach, OptionSelector))
 			{

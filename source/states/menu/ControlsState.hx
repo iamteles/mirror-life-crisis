@@ -7,6 +7,7 @@ import flixel.input.gamepad.FlxGamepadInputID as FlxPad;
 import flixel.input.keyboard.FlxKey;
 import flixel.math.FlxMath;
 import flixel.util.FlxTimer;
+import flixel.addons.display.FlxBackdrop;
 import data.GameData.MusicBeatState;
 import gameObjects.menu.Alphabet;
 import gameObjects.menu.AlphabetMenu;
@@ -39,11 +40,12 @@ class ControlsState extends MusicBeatState
 	override function create()
 	{
 		super.create();
-		var bg = new FlxSprite().loadGraphic(Paths.image('menu/backgrounds/menuDesat'));
-		bg.scale.set(1.2,1.2); bg.updateHitbox();
-		bg.screenCenter();
-		bg.color = OptionsState.bgColors.get("controls");
-		add(bg);
+
+		var bg = new FlxBackdrop(Paths.image("menu/grid"), XY, 0, 0);
+        bg.velocity.set(FlxG.random.bool(50) ? 90 : -90, FlxG.random.bool(50) ? 90 : -90);
+       	bg.screenCenter();
+		bg.color = OptionsState.bgColors.get("controls"); 
+        add(bg);
 
 		grpMain = new FlxTypedGroup<AlphabetMenu>();
 		add(grpMain);

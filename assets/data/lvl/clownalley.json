@@ -1,0 +1,55 @@
+{
+    "zoom": 1,
+    "music": "all",
+    "spawnPoint": [200, 200],
+    "boundaries": [0, -1000, 1800, 4000],
+    "camPos": [0, -200],
+    "objects": [
+        {
+            "objName": "alley",
+            "path": "side/levels/clownalley",
+            "position": [0, -80],
+            "scale": 1
+        },
+        {
+            "objName": "'friend'",
+            "path": "side/chars/pete",
+            "animations": [
+                {
+                    "name": "idle",
+                    "prefix": "skinny pete",
+                    "framerate": 24,
+                    "looped": true
+                }
+            ],
+            "position": [1200, 140],
+            "clickableCall": "dialogpete"
+        }
+    ],
+    "foreground": [
+        {
+            "objName": "vignette",
+            "path": "vignette",
+            "position": [-50, -50],
+            "scale": 1.3,
+            "alpha": 0.4,
+            "scrollFactor": [0, 0]
+        }
+    ],
+    "hitboxes": [
+        {
+            "hbxName": "right",
+            "position": [1330, 0],
+            "size": [1, 1000]
+        }
+    ],
+    "warp": [
+        {
+            "wrpName": "goback",
+            "position": [-50, 0],
+            "size": [1, 1000],
+            "location": "park",
+            "ret": true
+        }
+    ]
+}

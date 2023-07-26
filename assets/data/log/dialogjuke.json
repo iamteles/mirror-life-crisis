@@ -1,0 +1,31 @@
+{
+    "characters": ["juke", "minami"],
+    "finisher": "progjuke",
+    "lines": [
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "HeLlO sTrAnGeR :o)!"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "And what is this.."
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "ThIs Is ThE rApPiNg LoUnGe."
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "If YoU eVeR wAnT tO sInG sOmE sOnGs, YoU cOmE tO mE :o)"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "I see…"
+        }
+    ]
+}

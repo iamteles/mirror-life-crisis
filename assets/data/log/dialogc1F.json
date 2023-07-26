@@ -1,0 +1,36 @@
+{
+    "characters": ["c1", "minami"],
+    "finisher": "",
+    "lines": [
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "Hiya!! Congrats on beating the mod!"
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "We hope you enjoyed it!"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "Thanks?"
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "You can now go ahead and play the MANIA charts!"
+        },
+        {
+            "character": "left",
+            "frame": "neutral",
+            "text": "Good luck on those!"
+        },
+        {
+            "character": "right",
+            "frame": "neutral",
+            "text": "Alright…"
+        }
+    ]
+}

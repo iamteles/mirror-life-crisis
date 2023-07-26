@@ -14,7 +14,7 @@ using StringTools;
 
 class DebugState extends MusicBeatState
 {
-	var optionShit:Array<String> = ["prismatic", "ugh", "hub"];
+	var optionShit:Array<String> = ["intro", "clown"];
 	static var curSelected:Int = 1;
 
 	var optionGroup:FlxTypedGroup<FlxText>;
@@ -46,7 +46,7 @@ class DebugState extends MusicBeatState
 			optionGroup.add(item);
 		}
 
-		var warn = new FlxText(0, 0, 0, "WARNING\nscores wont save for now");
+		var warn = new FlxText(0, 0, 0, "WARNING\npress numbers to change progression");
 		warn.setFormat(Main.gFont, 27, 0xFFFF0000);
 		warn.setBorderStyle(OUTLINE, FlxColor.BLACK, 1);
 		warn.alignment = CENTER;
@@ -71,18 +71,55 @@ class DebugState extends MusicBeatState
 			Main.switchState(new states.menu.OptionsState());
 		}
 
+		if(FlxG.keys.justPressed.ZERO)
+		{
+			SaveData.progress(0);
+			FlxG.sound.play(Paths.sound("beep"));
+		}
+
+		if(FlxG.keys.justPressed.ONE)
+		{
+			SaveData.progress(1);
+			FlxG.sound.play(Paths.sound("beep"));
+		}
+		if(FlxG.keys.justPressed.TWO)
+		{
+			SaveData.progress(2);
+			FlxG.sound.play(Paths.sound("beep"));
+		}
+		if(FlxG.keys.justPressed.THREE)
+		{
+			SaveData.progress(3);
+			FlxG.sound.play(Paths.sound("beep"));
+		}
+		if(FlxG.keys.justPressed.FOUR)
+		{
+			SaveData.progress(4);
+			FlxG.sound.play(Paths.sound("beep"));
+		}
+		if(FlxG.keys.justPressed.FIVE)
+		{
+			SaveData.progress(5);
+			FlxG.sound.play(Paths.sound("beep"));
+		}
+
 		if(Controls.justPressed("BACK")) {
 			Main.switchState(new MenuState());
 		}
 
 		if(Controls.justPressed("ACCEPT"))
 		{
-			if(optionShit[curSelected] == 'hub') {
+			if(optionShit[curSelected] == 'intro') {
 				SideState.lvlId = 'street';
+				Main.switchState(new SideState());
+			}
+			else if (optionShit[curSelected] == 'clown') {
+				SideState.lvlId = 'village';
 				Main.switchState(new SideState());
 			}
 			else {
 				PlayState.SONG = SongData.loadFromJson(optionShit[curSelected]);
+				PlayState.diff = 'NORMAL';
 				Main.switchState(new PlayState());
 			}
 		}

@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="TIMESATICKIN.png">
+	<!-- Created with Adobe Animate version 20.0.0.17400 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="piece of paper0000" x="3319" y="3761" width="147" height="203" frameX="0" frameY="-1110" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0001" x="3319" y="3761" width="147" height="203" frameX="0" frameY="-1110" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0002" x="6397" y="1537" width="353" height="125" frameX="-126" frameY="-965" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0003" x="6397" y="1537" width="353" height="125" frameX="-126" frameY="-965" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0004" x="4213" y="3056" width="356" height="212" frameX="-332" frameY="-678" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0005" x="4213" y="3056" width="356" height="212" frameX="-332" frameY="-678" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0006" x="3319" y="3449" width="414" height="294" frameX="-330" frameY="-703" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0007" x="3319" y="3449" width="414" height="294" frameX="-330" frameY="-703" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0008" x="3319" y="3056" width="876" height="375" frameX="-226" frameY="-570" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0009" x="3319" y="3056" width="876" height="375" frameX="-226" frameY="-570" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0010" x="1593" y="3056" width="1708" height="1152" frameX="-27" frameY="-125" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0011" x="1629" y="34" width="1715" height="1485" frameX="-70" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0012" x="1629" y="34" width="1715" height="1485" frameX="-70" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0013" x="3362" y="34" width="1692" height="1485" frameX="-90" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0014" x="3362" y="34" width="1692" height="1485" frameX="-90" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0015" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0016" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0017" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0018" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0019" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0020" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0021" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0022" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0023" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0024" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0025" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0026" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0027" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0028" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0029" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0030" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0031" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0032" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0033" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0034" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0035" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0036" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0037" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0038" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0039" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0040" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0041" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0042" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0043" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0044" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0045" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0046" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0047" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0048" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0049" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0050" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0051" x="5072" y="34" width="1679" height="1485" frameX="-105" frameY="0" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0052" x="1629" y="1537" width="1663" height="1492" frameX="-116" frameY="-21" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0053" x="1629" y="1537" width="1663" height="1492" frameX="-116" frameY="-21" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0054" x="3310" y="1537" width="1640" height="1501" frameX="-128" frameY="-27" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0055" x="3310" y="1537" width="1640" height="1501" frameX="-128" frameY="-27" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0056" x="4968" y="1537" width="1411" height="1561" frameX="-389" frameY="-151" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0057" x="4968" y="1537" width="1411" height="1561" frameX="-389" frameY="-151" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0058" x="34" y="2125" width="1541" height="2005" frameX="-719" frameY="-194" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0059" x="34" y="2125" width="1541" height="2005" frameX="-719" frameY="-194" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0060" x="34" y="34" width="1577" height="2073" frameX="-1168" frameY="-363" frameWidth="2745" frameHeight="2436"/>
+	<SubTexture name="piece of paper0061" x="34" y="34" width="1577" height="2073" frameX="-1168" frameY="-363" frameWidth="2745" frameHeight="2436"/>
+</TextureAtlas>

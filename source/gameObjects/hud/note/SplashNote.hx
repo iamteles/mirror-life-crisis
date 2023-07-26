@@ -46,8 +46,8 @@ class SplashNote extends FlxSprite
 					default:
 						frames = Paths.getSparrowAtlas("notes/base/splashes");
 
-						animation.addByPrefix("splash1", 'up splash 1', 24, false);
-						animation.addByPrefix("splash2", 'up splash 1', 24, false);
+						animation.addByPrefix("splash1", '$direction splash', 24, false);
+						animation.addByPrefix("splash2", '$direction splash', 24, false);
 
 						scale.set(0.7,0.7);
 						updateHitbox();

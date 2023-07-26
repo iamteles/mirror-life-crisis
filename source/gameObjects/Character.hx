@@ -3,8 +3,22 @@ package gameObjects;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.math.FlxPoint;
+import sys.io.File;
 
 using StringTools;
+
+// you might be asking yourself, why make a charactor json just for this! and i tell you to kill yourself
+typedef CharInfo =
+{
+	var globalOffset:Null<Array<Float>>;
+	var cameraOffset:Null<Array<Float>>;
+	var offsets:Null<Array<Offsets>>;
+}
+typedef Offsets =
+{
+	var anim:String;
+	var pos:Array<Float>;
+} 
 
 class Character extends FlxSprite
 {
@@ -25,6 +39,8 @@ class Character extends FlxSprite
 	public var cameraOffset:FlxPoint = new FlxPoint();
 	private var scaleOffset:FlxPoint = new FlxPoint();
 
+	var charData:CharInfo;
+
 	public function reloadChar(curChar:String = "bf", isPlayer:Bool = false):Character
 	{
 		this.curChar = curChar;
@@ -37,55 +53,60 @@ class Character extends FlxSprite
 		globalOffset.set();
 		cameraOffset.set();
 
+		try
+		{
+			charData = haxe.Json.parse(File.getContent('assets/data/chars/' + curChar + '.json').trim());
+		}
+		catch (e)
+		{
+			trace('Uncaught Error: $e');
+
+			charData = haxe.Json.parse('{
+				"globalOffset": [0, 0],
+				"cameraOffset": [0, 0]
+			}');
+		}
+
 		// what
 		switch(curChar)
 		{
-			case "gemamugen":
-				frames = Paths.getSparrowAtlas("characters/gemamugen/gemamugen");
+			case 'juke':
+				frames = Paths.getSparrowAtlas("characters/juke/juke");
 
-				animation.addByPrefix('idle', 		'idle', 24, true);
-				animation.addByPrefix('idle-alt',	'chacharealsmooth', 24, true);
-				animation.addByPrefix('singLEFT', 	'left', 24, false);
-				animation.addByPrefix('singDOWN', 	'down', 24, false);
-				animation.addByPrefix('singUP', 	'up', 24, false);
-				animation.addByPrefix('singRIGHT', 	'right', 24, false);
+				animation.addByIndices('danceLeft', 'jukebox idle', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
+				animation.addByIndices('danceRight', 'jukebox idle', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 
-				addOffset('idle');
-				addOffset('idle-alt',	-30,	0.5);
-				addOffset('singLEFT',	114.5, 	-7);
-				addOffset('singDOWN',	-1,	 	-5);
-				addOffset('singUP',		-0.5,	152);
-				addOffset('singRIGHT',	30,  	-4.5);
+				addOffset('danceLeft');
+				addOffset('danceRight');
 
 				playAnim('idle');
-
-				scale.set(2,2);
-				globalOffset.x = -300;
-				cameraOffset.y = -180;
 
 			case "minami":
 				frames = Paths.getSparrowAtlas("characters/minami/Minami");
 
-				animation.addByPrefix('idle', 		'Minami Idle', 24, true);
-				animation.addByPrefix('singLEFT', 	'Minami Left', 24, false);
-				animation.addByPrefix('singDOWN', 	'Minami Down', 24, false);
-				animation.addByPrefix('singUP', 	'Minami Up', 24, false);
-				animation.addByPrefix('singRIGHT', 	'Minami Right', 24, false);
+				animation.addByPrefix('idle', 			'Minami Idle', 		24, true);
+				animation.addByPrefix('singLEFT', 		'Minami Left', 		24, false);
+				animation.addByPrefix('singDOWN', 		'Minami Down', 		24, false);
+				animation.addByPrefix('singUP', 		'Minami Up',   		24, false);
+				animation.addByPrefix('singRIGHT', 		'Minami Right', 	24, false);
+				animation.addByPrefix('singLEFTmiss',	'Minami MISSleft', 	24, false);
+				animation.addByPrefix('singDOWNmiss',	'Minami MISSdown', 	24, false);
+				animation.addByPrefix('singUPmiss',		'Minami MISSup', 	24, false);
+				animation.addByPrefix('singRIGHTmiss',  'Minami MISSright', 24, false);
 
-				addOffset('idle', -35, 270);
-				addOffset('singLEFT', 84, 274);
-				addOffset('singDOWN', -89, 130);
-				addOffset('singUP', -7, 280);
-				addOffset('singRIGHT', -132, 204);
+				addOffset('idle', 		   -35, 270);
+				addOffset('singLEFT',  		84, 274);
+				addOffset('singDOWN',	   -89, 130);
+				addOffset('singUP', 		-7, 280);
+				addOffset('singRIGHT', 	  -132, 204);
+				addOffset('singLEFTmiss', 	77, 271);
+				addOffset('singDOWNmiss', 	-89, 113);
+				addOffset('singUPmiss', 	-7, 279);
+				addOffset('singRIGHTmiss', -132, 200);
 
 				playAnim('idle');
 
 				flipX = true;
-
-				globalOffset.x = -740;
-				globalOffset.y = 320;
-				cameraOffset.x = -320;
-				cameraOffset.y = -150;
 			
 			case "clownami":
 				frames = Paths.getSparrowAtlas("characters/clown/Clownami");
@@ -97,19 +118,72 @@ class Character extends FlxSprite
 				animation.addByPrefix('singRIGHT', 	'Clownami Right', 24, false);
 				animation.addByPrefix('bow', 		'Clownami Bow', 24, false);
 
-				addOffset('idle', -1362, 24);
-				addOffset('singLEFT', -1170, -55);
-				addOffset('singDOWN', -1245, -106);
-				addOffset('singUP', -1360, 31);
-				addOffset('singRIGHT', -1399, 11);
-				addOffset('bow', -1280, 23);
+				playAnim('idle');
+			case "minami-3a":
+				frames = Paths.getSparrowAtlas("characters/minami-3a/minami back");
+
+				animation.addByPrefix('idle', 		'idle', 24, true);
+				animation.addByPrefix('singLEFT', 	'left', 24, false);
+				animation.addByPrefix('singDOWN', 	'down', 24, false);
+				animation.addByPrefix('singUP', 	'up', 24, false);
+				animation.addByPrefix('singRIGHT', 	'right', 24, false);
+
+				flipX = true;
+				playAnim('idle');
+
+			case "minami-3c":
+				frames = Paths.getSparrowAtlas("characters/minami-3c/minami back");
+
+				animation.addByPrefix('idle', 		'idle', 24, true);
+				animation.addByPrefix('singLEFT', 	'left', 24, false);
+				animation.addByPrefix('singDOWN', 	'down', 24, false);
+				animation.addByPrefix('singUP', 	'up', 24, false);
+				animation.addByPrefix('singRIGHT', 	'right', 24, false);
+
+				flipX = true;
+				playAnim('idle');
+			case "minami-3b":
+				frames = Paths.getSparrowAtlas("characters/minami-3b/minami employee");
+
+				animation.addByPrefix('idle', 		'idle', 24, true);
+				animation.addByPrefix('singLEFT', 	'left', 24, false);
+				animation.addByPrefix('singDOWN', 	'down', 24, false);
+				animation.addByPrefix('singUP', 	'up', 24, false);
+				animation.addByPrefix('singRIGHT', 	'right', 24, false);
+
+				flipX = true;
+				playAnim('idle');
+			case "narrator":
+				frames = Paths.getSparrowAtlas("characters/narrator/narrator");
+
+				animation.addByPrefix('idle', 		'idle', 24, true);
+				animation.addByPrefix('singLEFT', 	'left', 24, false);
+				animation.addByPrefix('singDOWN', 	'down', 24, false);
+				animation.addByPrefix('singUP', 	'up', 24, false);
+				animation.addByPrefix('singRIGHT', 	'right', 24, false);
+
+				playAnim('idle');
+			case "narratorb":
+				frames = Paths.getSparrowAtlas("characters/narrator/narrator");
+
+				animation.addByPrefix('idle', 		'idle', 24, true);
+				animation.addByPrefix('singLEFT', 	'left', 24, false);
+				animation.addByPrefix('singDOWN', 	'down', 24, false);
+				animation.addByPrefix('singUP', 	'up', 24, false);
+				animation.addByPrefix('singRIGHT', 	'right', 24, false);
 
 				playAnim('idle');
 
-				globalOffset.x = -500;
-				globalOffset.y = 80;
-				cameraOffset.x = 910;
-				cameraOffset.y = 20;
+			case "boss":
+				frames = Paths.getSparrowAtlas("characters/boss/boss");
+
+				animation.addByPrefix('idle', 		'idle', 24, true);
+				animation.addByPrefix('singLEFT', 	'left', 24, false);
+				animation.addByPrefix('singDOWN', 	'down', 24, false);
+				animation.addByPrefix('singUP', 	'up', 24, false);
+				animation.addByPrefix('singRIGHT', 	'right', 24, false);
+
+				playAnim('idle');
 			case "bf":
 				frames = Paths.getSparrowAtlas("characters/bf/BOYFRIEND");
 
@@ -152,15 +226,21 @@ class Character extends FlxSprite
 				playAnim('idle');
 
 				flipX = true;
-
-				/*if(!isPlayer)
-				{
-					singAnims = ["firstDeath", "firstDeath", "firstDeath", "firstDeath"];
-				}*/
-
 			default:
 				return reloadChar("bf", isPlayer);
 		}
+
+		if(charData.offsets != null) {
+			for (anim in charData.offsets)
+			{
+				addOffset(anim.anim, anim.pos[0], anim.pos[1]);
+			}
+		}
+
+		if(charData.globalOffset != null) 
+			globalOffset.set(charData.globalOffset[0], charData.globalOffset[1]);
+		if(charData.cameraOffset != null)
+			cameraOffset.set(charData.cameraOffset[0], charData.cameraOffset[1]);
 
 		updateHitbox();
 		scaleOffset.set(offset.x, offset.y);
