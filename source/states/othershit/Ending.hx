@@ -31,6 +31,7 @@ class Ending extends MusicBeatState
                                 "horrible life.. I'm done I can't do this anymore. *sigh*"];
     var imgs:Array<String> = ['pe', 'pe', 'pe', 'pe'];
     var curLine:Int;
+    var waitIsOver:Bool;
     override function create()
     {
         super.create();
@@ -58,7 +59,7 @@ class Ending extends MusicBeatState
 		add(tex);
 
         ambience = new FlxSound();
-        ambience.loadEmbedded(Paths.music('all'), true, false);
+        ambience.loadEmbedded(Paths.music('win'), true, false);
         FlxG.sound.list.add(ambience);
         ambience.volume = 0;
         ambience.play();
@@ -67,7 +68,15 @@ class Ending extends MusicBeatState
         voiceline = new FlxSound();
 		FlxG.sound.list.add(voiceline);
 
-        textbox(lines[curLine]);
+        curLine = 1;
+
+        var countTimer = new FlxTimer().start(4, function(tmr:FlxTimer)
+        {
+            waitIsOver = true;
+            curLine = 0;
+            textbox(lines[curLine]);
+        });
+
     }
 
     override public function update(elapsed:Float)
@@ -82,7 +91,8 @@ class Ending extends MusicBeatState
                 panel.alpha = 0;
         }
 
-        if(FlxG.keys.justPressed.SPACE && hasScrolled) {
+        if(waitIsOver) {
+            if(FlxG.keys.justPressed.SPACE && hasScrolled) {
                 if(voiceline.playing) voiceline.stop();
                 FlxG.sound.play(Paths.sound('click'));
                 FlxTween.tween(tex, {alpha: 0}, 0.4, {
@@ -104,6 +114,7 @@ class Ending extends MusicBeatState
 
                     }
                 });
+            }
         }
     }
 

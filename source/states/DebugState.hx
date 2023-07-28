@@ -9,12 +9,13 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import data.GameData.MusicBeatState;
 import data.SongData;
+import states.othershit.*;
 
 using StringTools;
 
 class DebugState extends MusicBeatState
 {
-	var optionShit:Array<String> = ["intro", "clown"];
+	var optionShit:Array<String> = ["intro", "clown", "you win"];
 	static var curSelected:Int = 1;
 
 	var optionGroup:FlxTypedGroup<FlxText>;
@@ -110,12 +111,14 @@ class DebugState extends MusicBeatState
 		if(Controls.justPressed("ACCEPT"))
 		{
 			if(optionShit[curSelected] == 'intro') {
-				SideState.lvlId = 'street';
-				Main.switchState(new SideState());
+				Main.switchState(new Intro());
 			}
 			else if (optionShit[curSelected] == 'clown') {
 				SideState.lvlId = 'village';
 				Main.switchState(new SideState());
+			}
+			else if (optionShit[curSelected] == 'you win') {
+				Main.switchState(new Ending());
 			}
 			else {
 				PlayState.SONG = SongData.loadFromJson(optionShit[curSelected]);
