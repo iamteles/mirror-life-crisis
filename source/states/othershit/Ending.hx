@@ -102,10 +102,7 @@ class Ending extends MusicBeatState
                         hasScrolled = false;
 
                         if(curLine == lines.length) {
-							PlayState.SONG = SongData.loadFromJson("prismatic");
-							PlayState.isStory = true;
-							PlayState.diff = 'NORMAL';
-							Main.switchState(new PlayState());
+							Main.switchState(new ManiaUnlock());
                         }
 
                         else {

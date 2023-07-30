@@ -93,6 +93,7 @@ class PlayState extends MusicBeatState
 
 	var prismaticisover:Bool = false;
 	var isflashback:Bool = false;
+	private var meta:SongMetaTags;
 
 	function resetStatics()
 	{
@@ -163,7 +164,7 @@ class PlayState extends MusicBeatState
 
 		if(daSong == 'echo') {
 			juke = new Character();
-			juke.reloadChar("juke", true);
+			juke.reloadChar("juke", false);
 			juke.setPosition(stageBuild.gfData[0], stageBuild.gfData[1]);
 			juke.y -= juke.height;
 
@@ -209,31 +210,7 @@ class PlayState extends MusicBeatState
 			vhs.blend = LAYER;
 			vhs.cameras = [camHUD];
 			add(vhs);
-		}
 
-		var overlay = new FlxSprite(0, 0).loadGraphic(Paths.image("hud/overlays/" + SaveData.data.get("Mania Overlay")));
-		overlay.screenCenter();
-		overlay.cameras = [camHUD];
-		if(diff != 'MANIA')
-			overlay.alpha = 0;
-		add(overlay);
-
-		hudBuild = new HudClass();
-		hudBuild.cameras = [camHUD];
-		add(hudBuild);
-
-		vgblack = new FlxSprite().loadGraphic(Paths.image("vignette"));
-		vgblack.screenCenter();
-		vgblack.cameras = [camVignette];
-		vgblack.alpha = 0;
-		add(vgblack);
-
-		// strumlines
-		strumlines = new FlxTypedGroup();
-		strumlines.cameras = [camHUD];
-		add(strumlines);
-
-		if(daSong == 'introspection') {
 			thetimesthattick = new FlxSprite();
 			thetimesthattick.frames = Paths.getSparrowAtlas("hud/base/TIMESATICKIN");
 			thetimesthattick.animation.addByPrefix("idle", 'piece of paper', 16, false);
@@ -247,6 +224,34 @@ class PlayState extends MusicBeatState
 			add(thetimesthattick);
 		}
 
+		var overlay = new FlxSprite(0, 0).loadGraphic(Paths.image("hud/overlays/" + SaveData.data.get("Mania Overlay")));
+		overlay.screenCenter();
+		overlay.cameras = [camHUD];
+		if(diff != 'MANIA')
+			overlay.alpha = 0;
+		add(overlay);
+
+		strumlines = new FlxTypedGroup();
+		strumlines.cameras = [camHUD];
+		add(strumlines);
+
+
+		
+		hudBuild = new HudClass();
+		hudBuild.cameras = [camHUD];
+		add(hudBuild);
+
+		vgblack = new FlxSprite().loadGraphic(Paths.image("vignette"));
+		vgblack.screenCenter();
+		vgblack.cameras = [camVignette];
+		vgblack.alpha = 0;
+		add(vgblack);
+
+		meta = new SongMetaTags(0, 144, daSong);
+		meta.cameras = [camVignette];
+		add(meta);
+
+		// strumlines
 		//strumline.scrollSpeed = 4.0; // 2.8
 
 		strumPos = [FlxG.width / 2, FlxG.width / 4];
@@ -266,7 +271,7 @@ class PlayState extends MusicBeatState
 		dadStrumline.ID = 0;
 		strumlines.add(dadStrumline);
 
-		bfStrumline = new Strumline(posBF, boyfriend, downscroll, true, false, assetModifier);
+		bfStrumline = new Strumline(posBF, boyfriend, downscroll, true, SaveData.data.get("Botplay"), assetModifier);
 		bfStrumline.ID = 1;
 		strumlines.add(bfStrumline);
 
@@ -464,6 +469,12 @@ class PlayState extends MusicBeatState
 				startSong();
 			}
 
+			if(daCount == 0) {
+				if(meta != null){
+					meta.start();
+				}
+			}
+
 			if(daCount != 4)
 			{
 				var which:String = ["3", "2", "1", "GO"][daCount];
@@ -560,10 +571,14 @@ class PlayState extends MusicBeatState
 			health += 0.5;
 		}
 
-		Timings.score += Math.floor(100 * judge);
-		Timings.addAccuracy(judge);
 
-		if(miss)
+		if(!SaveData.data.get("Botplay")) {
+			Timings.score += Math.floor(100 * judge);
+			Timings.addAccuracy(judge);
+		}
+
+
+		if(miss && !SaveData.data.get("Botplay"))
 		{
 			Timings.misses++;
 		}
@@ -595,7 +610,7 @@ class PlayState extends MusicBeatState
 		if(Controls.justPressed("RESET"))
 			startGameOver();
 
-		if(FlxG.keys.justPressed.ONE)
+		if(FlxG.keys.justPressed.ONE && SaveData.data.get('Munchlog') == 398)
 		{
 			endSong();
 		}
@@ -872,11 +887,14 @@ class PlayState extends MusicBeatState
 									thisChar.holdTimer = 0;
 								}
 
-								var missJudge:Float = Timings.timingsMap.get("miss")[1];
-								health -= 0.5;
-								Timings.score += Math.floor(100 * missJudge);
-								Timings.addAccuracy(missJudge);
-								Timings.misses++;
+								if(!SaveData.data.get("Botplay"))
+								{
+									var missJudge:Float = Timings.timingsMap.get("miss")[1];
+									health -= 0.5;
+									Timings.score += Math.floor(100 * missJudge);
+									Timings.addAccuracy(missJudge);
+									Timings.misses++;
+								}
 								//hudBuild.updateText();
 							}
 						}
@@ -1335,16 +1353,18 @@ class PlayState extends MusicBeatState
 	}
 
 	function endSong() {
-		Highscore.addScore(daSong + diff, {
-			score: 		Timings.score,
-			accuracy: 	Timings.accuracy,
-			misses: 	Timings.misses,
-		});
+		if(!SaveData.data.get("Downscroll")) {
+			Highscore.addScore(daSong + diff, {
+				score: 		Timings.score,
+				accuracy: 	Timings.accuracy,
+				misses: 	Timings.misses,
+			});
+		}
 
 		switch (daSong) {
 			case 'prismatic':
 				if(isStory) {
-					Main.switchState(new SideState());
+					Main.switchState(new VideoState('video', new SideState()));
 					SideState.lvlId = 'village';
 				}
 				else {

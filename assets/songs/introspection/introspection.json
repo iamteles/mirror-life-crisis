@@ -1,6 +1,6 @@
 {
 	"song": {
-		"player1": "bf",
+		"player1": "minami-3a",
 		"gfVersion": "gf",
 		"notes": [
 			{
@@ -8688,7 +8688,7 @@
 			}
 		],
 		"events": [],
-		"player2": "dad",
+		"player2": "narrator",
 		"splashSkin": "noteSplashes",
 		"song": "Introspection",
 		"needsVoices": true,

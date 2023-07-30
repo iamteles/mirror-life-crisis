@@ -86,7 +86,7 @@ class GameOverSubState extends MusicBeatSubState
 	{
 		ended = true;
 
-		FlxG.sound.music.volume = 0;
+		FlxG.sound.music.stop();
 		FlxG.sound.play(Paths.sound('gameoverend'));
 
 		new FlxTimer().start(1.0, function(tmr:FlxTimer)

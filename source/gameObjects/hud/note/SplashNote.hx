@@ -49,7 +49,7 @@ class SplashNote extends FlxSprite
 						animation.addByPrefix("splash1", '$direction splash', 24, false);
 						animation.addByPrefix("splash2", '$direction splash', 24, false);
 
-						scale.set(0.7,0.7);
+						//scale.set(0.7,0.7);
 						updateHitbox();
 				}
 		}

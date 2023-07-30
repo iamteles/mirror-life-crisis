@@ -39,9 +39,9 @@ class MenuState extends MusicBeatState
 	{
 		super.create();
 
-		if(FlxG.sound.music == null) {
+		if(FlxG.sound.music == null || !FlxG.sound.music.playing) {
 			FlxG.sound.playMusic(Paths.music('menu'), 1);
-			Conductor.setBPM(260);
+			Conductor.setBPM(130);
 		}
 
 		Utils.flash(FlxG.camera, 0.5);
@@ -127,6 +127,7 @@ class MenuState extends MusicBeatState
 		if(Controls.justPressed("ACCEPT") && !accepted)
 		{
 			accepted = true;
+			FlxG.sound.play(Paths.sound("accept"));
 			itemGroup.forEach(function(spr:FlxSprite)
 			{
 				FlxFlicker.flicker(spr, 1, 0.06, false, false, function(flick:FlxFlicker)
@@ -140,12 +141,29 @@ class MenuState extends MusicBeatState
 								Main.switchState(new SideState());
 							}
 
-							FlxG.sound.music.volume = 0;
+							FlxG.sound.music.stop();
 						case 'Credits':
 							trace(SaveData.data.get('Munchlog'));
-							if(SaveData.data.get('Munchlog') == 398) {
+							var logged = SaveData.data.get('Munchlog');
+							if(logged == 398) {
 								Main.switchState(new DebugState());
-								FlxG.sound.music.volume = 0;
+								FlxG.sound.music.stop();
+							}
+							else if (logged == 312) {
+								FlxG.sound.music.stop();
+								Main.switchState(new VideoState('kuze', new Credits()));
+							}
+							else if (logged == 121) {
+								FlxG.sound.music.stop();
+								Main.switchState(new VideoState('abi', new Credits()));
+							}
+							else if (logged == 413) {
+								FlxG.sound.music.stop();
+								Main.switchState(new VideoState('FUCK', new Credits()));
+							}
+							else if (logged == 167) {
+								FlxG.sound.music.stop();
+								Main.switchState(new VideoState('abi2', new Credits()));
 							}
 							else {
 								Main.switchState(new Credits());
@@ -184,6 +202,7 @@ class MenuState extends MusicBeatState
 	}
 
 	private override function beatHit() {
+		super.beatHit();
 		logo.animation.play('bump');
 	}
 }

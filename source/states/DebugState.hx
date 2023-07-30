@@ -15,7 +15,7 @@ using StringTools;
 
 class DebugState extends MusicBeatState
 {
-	var optionShit:Array<String> = ["intro", "clown", "you win"];
+	var optionShit:Array<String> = ["intro", "clown", "you win", "video"];
 	static var curSelected:Int = 1;
 
 	var optionGroup:FlxTypedGroup<FlxText>;
@@ -120,9 +120,13 @@ class DebugState extends MusicBeatState
 			else if (optionShit[curSelected] == 'you win') {
 				Main.switchState(new Ending());
 			}
+			else if (optionShit[curSelected] == 'video') {
+				Main.switchState(new VideoState('video', new DebugState()));
+			}
 			else {
 				PlayState.SONG = SongData.loadFromJson(optionShit[curSelected]);
 				PlayState.diff = 'NORMAL';
+				PlayState.isStory = false;
 				Main.switchState(new PlayState());
 			}
 		}

@@ -40,6 +40,7 @@ class Character extends FlxSprite
 	private var scaleOffset:FlxPoint = new FlxPoint();
 
 	var charData:CharInfo;
+	var isNativlyPlayer:Bool = false;
 
 	public function reloadChar(curChar:String = "bf", isPlayer:Bool = false):Character
 	{
@@ -107,6 +108,7 @@ class Character extends FlxSprite
 				playAnim('idle');
 
 				flipX = true;
+				isNativlyPlayer = true;
 			
 			case "clownami":
 				frames = Paths.getSparrowAtlas("characters/clown/Clownami");
@@ -127,6 +129,10 @@ class Character extends FlxSprite
 				animation.addByPrefix('singDOWN', 	'down', 24, false);
 				animation.addByPrefix('singUP', 	'up', 24, false);
 				animation.addByPrefix('singRIGHT', 	'right', 24, false);
+				animation.addByPrefix('singLEFTmiss', 	'left', 24, false);
+				animation.addByPrefix('singDOWNmiss', 	'down', 24, false);
+				animation.addByPrefix('singUPmiss', 	'up', 24, false);
+				animation.addByPrefix('singRIGHTmiss', 	'right', 24, false);
 
 				flipX = true;
 				playAnim('idle');
@@ -139,6 +145,10 @@ class Character extends FlxSprite
 				animation.addByPrefix('singDOWN', 	'down', 24, false);
 				animation.addByPrefix('singUP', 	'up', 24, false);
 				animation.addByPrefix('singRIGHT', 	'right', 24, false);
+				animation.addByPrefix('singLEFTmiss', 	'left', 24, false);
+				animation.addByPrefix('singDOWNmiss', 	'down', 24, false);
+				animation.addByPrefix('singUPmiss', 	'up', 24, false);
+				animation.addByPrefix('singRIGHTmiss', 	'right', 24, false);
 
 				flipX = true;
 				playAnim('idle');
@@ -150,6 +160,10 @@ class Character extends FlxSprite
 				animation.addByPrefix('singDOWN', 	'down', 24, false);
 				animation.addByPrefix('singUP', 	'up', 24, false);
 				animation.addByPrefix('singRIGHT', 	'right', 24, false);
+				animation.addByPrefix('singLEFTmiss', 	'left', 24, false);
+				animation.addByPrefix('singDOWNmiss', 	'down', 24, false);
+				animation.addByPrefix('singUPmiss', 	'up', 24, false);
+				animation.addByPrefix('singRIGHTmiss', 	'right', 24, false);
 
 				flipX = true;
 				playAnim('idle');
@@ -226,6 +240,7 @@ class Character extends FlxSprite
 				playAnim('idle');
 
 				flipX = true;
+				isNativlyPlayer = true;
 			default:
 				return reloadChar("bf", isPlayer);
 		}
@@ -319,5 +334,9 @@ class Character extends FlxSprite
 		// useful for pixel notes since their offsets are not 0, 0 by default
 		offset.x += scaleOffset.x;
 		offset.y += scaleOffset.y;
+
+		if(!isNativlyPlayer && isPlayer) {
+			this.color = (animName.endsWith('miss')) ? 0xFFFF0000 : 0xFFFFFFFF;
+		}
 	}
 }

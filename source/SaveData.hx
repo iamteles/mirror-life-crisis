@@ -28,6 +28,11 @@ class SaveData
 			CHECKMARK,
 			"Makes you able to press keys freely without missing notes."
 		],
+		"Botplay" => [
+			false,
+			CHECKMARK,
+			"The game plays for you."
+		],
 		"FPS Counter" => [
 			false,
 			CHECKMARK,
@@ -107,7 +112,7 @@ class SaveData
 		saveFile.bind("options", "teles/MLC"); // use these for settings
 
 		progressionSave = new FlxSave();
-		progressionSave.bind("progression", "teles/MLC"); // use these for settings
+		progressionSave.bind("progression", "teles/MLC"); // use these for progressions´
 
 		FlxG.save.bind("save-data", "teles/MLC"); // these are for other stuff
 		load();
@@ -178,6 +183,40 @@ class SaveData
 		if(clowns.get('lexi') && clowns.get('pete') && clowns.get('juke'))
 			checked = true;
 		return checked;
+	}
+
+	public static function wipe(?which:String = 'ALL'){
+		switch(which) {
+			case 'PROGRESS':
+				progressionSave.erase();
+				progression = 0;
+				clowns = [
+					"lexi" => false,
+					"juke" => false,
+					"pete" => false,
+					"munchlog" => false
+				];
+				trace ("Wiping progress " + progressionSave.data.progression + ' ' + progressionSave.data.clowns);
+			case 'HIGHSCORE':
+				FlxG.save.erase();
+			case 'OPTIONS':
+				saveFile.erase();
+				data = [];
+			default:
+				FlxG.save.erase();
+				saveFile.erase();
+				progressionSave.erase();
+				data = [];
+				progression = 0;
+				clowns = [
+					"lexi" => false,
+					"juke" => false,
+					"pete" => false,
+					"munchlog" => false
+				];
+		}
+
+		load();
 	}
 
 	public static function update()

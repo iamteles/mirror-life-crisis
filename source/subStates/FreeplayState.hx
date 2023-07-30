@@ -97,6 +97,7 @@ class FreeplayState extends MusicBeatSubState
 		{
 			PlayState.SONG = SongData.loadFromJson(optionShit[curSelected], possibleDiffs[curDiff]);
 			PlayState.diff = possibleDiffs[curDiff];
+			PlayState.isStory = false;
 			Main.switchState(new PlayState());
 		}
 	}

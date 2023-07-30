@@ -117,4 +117,7 @@ class Paths
 		what.play();
 		what.stop();
 	}
+	public static function video(key:String, ?format:String = 'mp4'):String {
+		return getPath('videos/$key.' + format);
+	}
 }

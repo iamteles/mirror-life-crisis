@@ -21,6 +21,22 @@
         {
             "anim": "singRIGHT",
             "pos": [-34, 4]
+        },
+        {
+            "anim": "singLEFTmiss",
+            "pos": [38, 0]
+        },
+        {
+            "anim": "singDOWNmiss",
+            "pos": [-19,-45]
+        },
+        {
+            "anim": "singUPmiss",
+            "pos": [-18,39]
+        },
+        {
+            "anim": "singRIGHTmiss",
+            "pos": [-34, 4]
         }
     ]
 }

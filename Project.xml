@@ -37,7 +37,7 @@
 	<haxelib name="flixel" />
 
 	<define name="DISCORD_RPC" if="desktop" unless="web || neko" />
-
+	<haxelib name="hxCodec" if="desktop || android" />
 	<haxelib name="discord_rpc" if="DISCORD_RPC"/>
 	
 	<!--In case you want to use the addons package-->

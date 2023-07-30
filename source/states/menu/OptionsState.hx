@@ -22,10 +22,12 @@ class OptionsState extends MusicBeatState
 			"Gameplay",
 			"Appearance",
 			"Controls",
+			"Save Data"
 		],
 		"Gameplay" => [
 			"Ghost Tapping",
 			"Downscroll",
+			"Botplay",
 			"Flashbang Mode",
 			"Framerate",
 			"Munchlog"
@@ -38,6 +40,12 @@ class OptionsState extends MusicBeatState
 			"Note Splashes",
 			"Mania Overlay"
 		],
+		"Save Data" => [
+			"Reset Story Mode",
+			"Reset Options",
+			"Reset Highscores",
+			"Reset All"
+		]
 	];
 
 	public static var bgColors:Map<String, FlxColor> = [
@@ -45,6 +53,7 @@ class OptionsState extends MusicBeatState
 		"Gameplay"	=> 0xFF83e6aa,
 		"Appearence"=> 0xFFf58ea9,
 		"controls"  => 0xFF8295f5,
+		"Save Data" => 0xfff7e968,
 	];
 
 	public static var curCat:String = "main";
@@ -103,7 +112,7 @@ class OptionsState extends MusicBeatState
 		else
 			bg.color = bgColors.get("main");
 
-		if(curCat == "main")
+		if(curCat == "main" || curCat == "Save Data")
 		{
 			for(i in 0...optionShit.get(curCat).length)
 			{
@@ -198,7 +207,7 @@ class OptionsState extends MusicBeatState
 		curSelected += change;
 		curSelected = FlxMath.wrap(curSelected, 0, optionShit.get(curCat).length - 1);
 
-		FlxG.sound.play(Paths.sound("beep"));
+		if (change != 0)  FlxG.sound.play(Paths.sound("beep"));
 
 		for(item in grpTexts.members)
 		{
@@ -289,6 +298,7 @@ class OptionsState extends MusicBeatState
 
 		if(Controls.justPressed("ACCEPT"))
 		{
+			FlxG.sound.play(Paths.sound("select"));
 			if(curCat == "main")
 			{
 				storedSelected.set("main", curSelected);
@@ -305,6 +315,22 @@ class OptionsState extends MusicBeatState
 							Main.skipStuff();
 							Main.switchState(new ControlsState());
 						});
+				}
+			}
+			else if(curCat == "Save Data")
+			{
+				storedSelected.set("Save Data", curSelected);
+				var daOption:String = grpTexts.members[curSelected].text;
+				switch(daOption.toLowerCase())
+				{
+					case "reset story mode":
+						SaveData.wipe('PROGRESS');
+					case "reset highscores":
+						SaveData.wipe('HIGHSCORE');
+					case "reset options":
+						SaveData.wipe('OPTIONS');
+					case "reset all":
+						SaveData.wipe('ALL');
 				}
 			}
 			else

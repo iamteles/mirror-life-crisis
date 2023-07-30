@@ -27,10 +27,7 @@ class HudClass extends FlxGroup
 	{
 		super();
 
-		glass = new FlxSprite(0, 0).loadGraphic(Paths.image("hud/base/glass"));
-		glass.alpha = 0;
-		glass.screenCenter();
-		add(glass);
+
 
 		downscroll = SaveData.data.get("Downscroll");
 		healthBar = new FlxSprite();
@@ -62,6 +59,11 @@ class HudClass extends FlxGroup
 		infoTxt.setBorderStyle(OUTLINE, FlxColor.BLACK, 1.5);
 		add(infoTxt);
 
+		glass = new FlxSprite(0, 0).loadGraphic(Paths.image("hud/base/glass"));
+		glass.alpha = 0;
+		glass.screenCenter();
+		add(glass);
+
 		updateHitbox();
 	
 	}
@@ -70,10 +72,15 @@ class HudClass extends FlxGroup
 
 	public function updateText()
 	{
-		infoTxt.text = '';
-		infoTxt.text += 			'Score: '		+ Timings.score;
-		infoTxt.text += separator + 'Accuracy: '	+ Timings.accuracy + "%";
-		infoTxt.text += separator + 'Breaks: '		+ Timings.misses;
+		if(SaveData.data.get("Botplay"))
+			infoTxt.text = "BOTPLAY ENABLED";
+		else {
+			infoTxt.text = '';
+			infoTxt.text += 			'Score: '		+ Timings.score;
+			infoTxt.text += separator + 'Accuracy: '	+ Timings.accuracy + "%";
+			infoTxt.text += separator + 'Breaks: '		+ Timings.misses;
+		}
+
 
 		infoTxt.screenCenter(X);
 		infoTxt.x -= 135;

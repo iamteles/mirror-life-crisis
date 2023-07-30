@@ -141,7 +141,11 @@ class SideState extends MusicBeatState
 			case 'street':
 				if(SaveData.progression <= 0) {
 					SaveData.progress(1);
-					textbox('One day in particular, as Minami was heading home to partake in her depressing activities, she came across a strange alleyway.', '12');
+					lines = [
+						['One day in particular, as Minami was heading home to partake in her depressing activities, she came across a strange alleyway.', '12'],
+						['Use the ARROW KEYS to move, SPACE to interact and SHIFT to run.', 'nan']
+					];
+					textbox(lines[curLine][0], lines[curLine][1]);
 				}
 
 			case 'alley':

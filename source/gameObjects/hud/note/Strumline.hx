@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import gameObjects.Character;
+import states.PlayState;
 
 class Strumline extends FlxGroup
 {
@@ -85,8 +86,9 @@ class Strumline extends FlxGroup
 	{
 		note.alpha = noteAlpha;
 		allNotes.add(note);
-		if(note.isHold)
+		if(note.isHold) {
 			holdGroup.add(note);
+		}
 		else
 			noteGroup.add(note);
 	}
