@@ -4,6 +4,7 @@ import flixel.util.FlxSort;
 import data.SongData.SwagSong;
 import data.SongData.SwagSection;
 import gameObjects.hud.note.Note;
+import data.GameData.NoteUtil;
 
 using StringTools;
 
@@ -24,7 +25,7 @@ class ChartLoader
 				if(event.stepTime == (daSection * 16))
 				{
 					noteCrochet = Conductor.calcStep(event.bpm);
-					trace('changed note bpm ${event.bpm}');
+					//trace('changed note bpm ${event.bpm}');
 				}*/
 			
 			for (songNotes in section.sectionNotes)

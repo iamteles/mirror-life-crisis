@@ -2,6 +2,7 @@ package gameObjects.hud.note;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
+import data.GameData.NoteUtil;
 
 class SplashNote extends FlxSprite
 {

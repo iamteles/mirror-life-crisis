@@ -1,7 +1,6 @@
 package;
 
 import flixel.FlxG;
-import flixel.input.gamepad.FlxGamepad;
 import flixel.input.gamepad.FlxGamepadInputID as FlxPad;
 import flixel.input.keyboard.FlxKey;
 import flixel.input.FlxInput.FlxInputState;
@@ -27,7 +26,7 @@ class Controls
 	{
 		if(!allControls.exists(bind))
 		{
-			trace("that bind does not exist dumbass");
+			//trace("that bind does not exist dumbass");
 			return false;
 		}
 

@@ -5,11 +5,9 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.FlxObject;
-import flixel.addons.effects.FlxTrail;
 import flixel.addons.text.FlxTypeText;
 import flixel.input.keyboard.FlxKey;
 import flixel.text.FlxText;
-import flixel.tile.FlxTileblock;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
@@ -18,12 +16,10 @@ import gameObjects.side.Level;
 import gameObjects.side.Player;
 import data.GameData.MusicBeatState;
 import data.*;
-import openfl.display.Shader;
-import openfl.display.GraphicsShader;
 import openfl.filters.ShaderFilter;
 import flixel.system.FlxSound;
 import subStates.*;
-import states.othershit.*;
+import states.menus.*;
 
 #if sys
 import sys.FileSystem;
@@ -155,22 +151,22 @@ class SideState extends MusicBeatState
 				}
 
 			case 'park':
-				if(SaveData.progression == 4) {
+				if(SaveData.progression == 5) {
 					paused = true;
 					DialogueSubstate.dialog = "echo";
 					openSubState(new DialogueSubstate());
 				}
 			case 'village': 
-				if(SaveData.progression <= 2) {
-					SaveData.progress(3);
+				if(SaveData.progression <= 3) {
+					SaveData.progress(4);
 					lines = [
 						['And, just like that, Minami found herself in the wonderfull world of Fooltopia!', '30'],
 						['Everyone is dressed like clowns, there is no sadness here.', '31'],
-						['Now Minami, remember, these clowns are here to make you happy and less depressed.', '32'],
+						['Now Minami, remember, these clowns are here to make you happier and less depressed.', '32'],
 						['This is your second chance.', '33'],
-						['If you arent happy after this, i might have to do a bit of intervening.', '34'],
+						["If you aren't happy after this, I might have to do a bit of intervening.", '34'],
 						['And we dont want that now, do we.', '35'],
-						['Go carry on, then. Go talk to the locals', '36']
+						['Go carry on, then. Go talk to the locals.', '36']
 					];
 					textbox(lines[curLine][0], lines[curLine][1]);
 				}
@@ -278,7 +274,7 @@ class SideState extends MusicBeatState
 			if (player.overlaps(obj[0]) && !SideState.inTextBox)
 			{
 				var add:String = '';
-				if(SaveData.progression >= 5)
+				if(SaveData.progression >= 6)
 					add = 'F';
 				switch (obj[1])
 				{
@@ -295,7 +291,7 @@ class SideState extends MusicBeatState
 						DialogueSubstate.dialog = obj[1] + add;
 						openSubState(new DialogueSubstate());
 					case 'dialogjuke':
-						if(SaveData.progression >= 5) {
+						if(SaveData.progression >= 6) {
 							player.walkingSound.stop();
 							player.runningSound.stop();
 							paused = true;

@@ -3,6 +3,7 @@ package gameObjects.hud.note;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.math.FlxPoint;
+import data.GameData.NoteUtil;
 
 class StrumNote extends FlxSprite
 {

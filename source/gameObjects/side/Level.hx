@@ -1,11 +1,9 @@
 package gameObjects.side;
 
-import lime.graphics.opengl.GLTransformFeedback;
 import flixel.FlxBasic;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 import states.SideState;
 import sys.io.File;
@@ -102,7 +100,7 @@ class Level extends FlxTypedGroup<FlxBasic>
 
 	public function loadJson()
 	{
-		trace('Attempt to load' + 'assets/data/lvl/' + lvlId + '.json');
+		//trace('Attempt to load' + 'assets/data/lvl/' + lvlId + '.json');
 		try
 		{
 			
@@ -110,7 +108,7 @@ class Level extends FlxTypedGroup<FlxBasic>
 		}
 		catch (e)
 		{
-			trace('Uncaught Error: $e');
+			//trace('Uncaught Error: $e');
 
 			lvlData = haxe.Json.parse('{
 			    "zoom": 1,
@@ -118,7 +116,7 @@ class Level extends FlxTypedGroup<FlxBasic>
 			}');
 		}
 
-		trace('Finish load.');
+		//trace('Finish load.');
 
 		zoom = lvlData.zoom;
 		spawnPoint = lvlData.spawnPoint;
@@ -149,7 +147,7 @@ class Level extends FlxTypedGroup<FlxBasic>
 				{
 					newSpr.setGraphicSize(Std.int(newSpr.width * object.scale));
 					newSpr.updateHitbox();
-					trace('Scaled.');
+					//trace('Scaled.');
 				}
 
 				if (object.alpha != null)
@@ -185,7 +183,7 @@ class Level extends FlxTypedGroup<FlxBasic>
 				{
 					newSpr.setGraphicSize(Std.int(newSpr.width * object.scale));
 					newSpr.updateHitbox();
-					trace('Scaled.');
+					//trace('Scaled.');
 				}
 
 				if (object.alpha != null)

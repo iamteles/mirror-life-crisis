@@ -1,11 +1,8 @@
 package subStates;
 
-import sys.db.Sqlite;
 import flixel.FlxG;
 import flixel.FlxBasic;
 import flixel.FlxSprite;
-import flixel.group.FlxGroup;
-import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
@@ -13,9 +10,7 @@ import flixel.system.FlxSound;
 import flixel.addons.text.FlxTypeText;
 import flixel.input.keyboard.FlxKey;
 import flixel.util.FlxTimer;
-import data.Conductor;
 import data.GameData.MusicBeatSubState;
-import gameObjects.menu.AlphabetMenu;
 import gameObjects.DialogueChar;
 import sys.io.File;
 import data.*;
@@ -64,13 +59,13 @@ class DialogueSubstate extends MusicBeatSubState
 		banana.alpha = 0;
 		add(banana);
 
-		trace('started substate');
+		//trace('started substate');
 
 		try
 		{
 			log = haxe.Json.parse(File.getContent('assets/data/log/' + dialog + '.json').trim());
 			
-			trace('loaded log');
+			//trace('loaded log');
 			left = new DialogueChar(log.characters[0], false);
 			left.loadJson();
 			left.enterFrame('neutral');
@@ -85,7 +80,7 @@ class DialogueSubstate extends MusicBeatSubState
 		}
 		catch (e)
 		{
-			trace('Uncaught Error: $e');
+			//trace('Uncaught Error: $e');
 			close();
 		}
 

@@ -13,6 +13,7 @@ import data.Conductor;
 import data.GameData.MusicBeatSubState;
 import gameObjects.menu.AlphabetMenu;
 import states.*;
+import states.menus.*;
 
 class PauseSubState extends MusicBeatSubState
 {
@@ -93,10 +94,17 @@ class PauseSubState extends MusicBeatSubState
 					Main.switchState();
 
 				case "exit to options":
-					Main.switchState(new states.menu.OptionsState(new PlayState()));
+					Main.switchState(new OptionsState(new PlayState()));
 
 				case "exit to menu":
-					Main.switchState(new MenuState());
+					if(SaveData.progression <= 2) {
+						SideState.lvlId = 'alley';
+						Main.switchState(new SideState());
+					}
+					else {
+						SideState.lvlId = 'park';
+						Main.switchState(new SideState());
+					}
 			}
 		}
 

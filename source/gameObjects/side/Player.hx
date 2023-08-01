@@ -1,11 +1,8 @@
 package gameObjects.side;
 
-import flixel.FlxBasic;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.system.FlxSound;
-import flixel.util.FlxColor;
 import flixel.math.FlxPoint;
 import states.SideState;
 

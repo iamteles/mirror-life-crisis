@@ -13,20 +13,20 @@ class DiscordClient
 	public function new()
 	{
 		#if DISCORD_RPC
-		trace("Discord Client starting...");
+		//trace("Discord Client starting...");
 		DiscordRpc.start({
 			clientID: "1132270314349412372",
 			onReady: onReady,
 			onError: onError,
 			onDisconnected: onDisconnected
 		});
-		trace("Discord Client started.");
+		//trace("Discord Client started.");
 
 		while (true)
 		{
 			DiscordRpc.process();
 			sleep(2);
-			//trace("Discord Client Update");
+			////trace("Discord Client Update");
 		}
 
 		DiscordRpc.shutdown();
@@ -54,12 +54,12 @@ class DiscordClient
 
 	static function onError(_code:Int, _message:String)
 	{
-		trace('Error! $_code : $_message');
+		//trace('Error! $_code : $_message');
 	}
 
 	static function onDisconnected(_code:Int, _message:String)
 	{
-		trace('Disconnected! $_code : $_message');
+		//trace('Disconnected! $_code : $_message');
 	}
 
 	public static function initialize()
@@ -69,7 +69,7 @@ class DiscordClient
 		{
 			new DiscordClient();
 		});
-		trace("Discord Client initialized");
+		//trace("Discord Client initialized");
 		isInitialized = true;
 		#end
 	}

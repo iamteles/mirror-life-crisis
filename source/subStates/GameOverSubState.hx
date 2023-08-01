@@ -1,19 +1,13 @@
 package subStates;
 
 import flixel.FlxG;
-import flixel.FlxObject;
 import flixel.FlxSprite;
-import flixel.group.FlxGroup;
-import flixel.math.FlxMath;
-import flixel.text.FlxText;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import flixel.FlxBasic;
 import data.GameData.MusicBeatSubState;
-import gameObjects.Character;
 import states.*;
+import states.menus.*;
 
 class GameOverSubState extends MusicBeatSubState
 {

@@ -31,7 +31,7 @@
         {
             "character": "narrator",
             "frame": "neutral",
-            "text": "What part of 'IM TRYING TO MAKE YOUR LIFE BETTER' do you not understand?",
+            "text": "What part about 'IM TRYING TO MAKE YOUR LIFE BETTER' do you not understand?",
             "voiceline": "41"
         },
         {
@@ -76,7 +76,7 @@
         {
             "character": "narrator",
             "frame": "neutral",
-            "text": "I didn't want to come to this, but, it seems that if I wan't you to change...",
+            "text": "I didn't want to come to this, but, it seems that if I want you to change...",
             "voiceline": "46"
         },
         {

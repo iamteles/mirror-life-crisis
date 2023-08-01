@@ -60,7 +60,7 @@ class Character extends FlxSprite
 		}
 		catch (e)
 		{
-			trace('Uncaught Error: $e');
+			//trace('Uncaught Error: $e');
 
 			charData = haxe.Json.parse('{
 				"globalOffset": [0, 0],
@@ -242,7 +242,7 @@ class Character extends FlxSprite
 				flipX = true;
 				isNativlyPlayer = true;
 			default:
-				return reloadChar("bf", isPlayer);
+				return reloadChar("minami", isPlayer);
 		}
 
 		if(charData.offsets != null) {

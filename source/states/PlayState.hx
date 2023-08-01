@@ -17,16 +17,13 @@ import flixel.tweens.FlxEase;
 import flixel.util.FlxTimer;
 import data.*;
 import data.SongData.SwagSong;
-import data.chart.*;
 import data.GameData.MusicBeatState;
 import data.GameData.Utils;
 import gameObjects.*;
 import gameObjects.hud.*;
 import gameObjects.hud.note.*;
 import subStates.*;
-import states.othershit.*;
-import openfl.display.Shader;
-import openfl.display.GraphicsShader;
+import states.menus.*;
 import openfl.filters.ShaderFilter;
 
 #if sys
@@ -493,7 +490,7 @@ class PlayState extends MusicBeatState
 				});
 			}
 
-			//trace(daCount);
+			////trace(daCount);
 
 			daCount++;
 		}, 5);
@@ -586,7 +583,7 @@ class PlayState extends MusicBeatState
 		{
 			if(judge <= Timings.timingsMap.get('shit')[1])
 			{
-				//trace("that was shit");
+				////trace("that was shit");
 				note.onMiss();
 			}
 		}
@@ -710,7 +707,7 @@ class PlayState extends MusicBeatState
 
 				if(Conductor.songPos >= note.songTime + Timings.timingsMap.get("good")[0] && !note.gotHit && note.canHit)
 				{
-					//trace("too late");
+					////trace("too late");
 					note.onMiss();
 				}
 
@@ -785,7 +782,7 @@ class PlayState extends MusicBeatState
 					if(pressedCheck)
 					{
 						hold.holdHitLength = Conductor.songPos - hold.songTime;
-						//trace('${hold.holdHitLength} / ${hold.holdLength}');
+						////trace('${hold.holdHitLength} / ${hold.holdLength}');
 						
 						var daRect = new FlxRect(
 							0,
@@ -1322,7 +1319,7 @@ class PlayState extends MusicBeatState
 				if(Math.abs(Conductor.songPos - music.time) >= 40 || forced)
 				{
 					// makes everyone sync to the instrumental
-					trace("synced song");
+					//trace("synced song");
 					Conductor.songPos = inst.time;
 					
 					if(music != inst)
@@ -1364,8 +1361,12 @@ class PlayState extends MusicBeatState
 		switch (daSong) {
 			case 'prismatic':
 				if(isStory) {
-					Main.switchState(new VideoState('video', new SideState()));
+					SaveData.progress(3);
 					SideState.lvlId = 'village';
+					if(!SaveData.data.get('Video Cutscenes'))
+						Main.switchState(new SideState());
+					else
+						Main.switchState(new VideoState('video', new SideState()));
 				}
 				else {
 					Main.switchState(new SideState());
@@ -1375,7 +1376,7 @@ class PlayState extends MusicBeatState
 				if(isStory) {
 					Main.switchState(new SideState());
 					SideState.lvlId = 'park';
-					SaveData.progress(4);
+					SaveData.progress(5);
 				}
 				else {
 					Main.switchState(new SideState());

@@ -5,8 +5,6 @@ import flixel.FlxSprite;
 import flixel.util.FlxSave;
 import data.Highscore;
 
-import flixel.input.keyboard.FlxKey;
-
 enum SettingType
 {
 	CHECKMARK;
@@ -97,6 +95,11 @@ class SaveData
 			"Self explanatory. Im pretty sure these descriptions dont actually show up ingame so if you are reading this props to you i guess.",
 			[1, 999]
 		],
+		"Video Cutscenes" => [
+			true,
+			CHECKMARK,
+			"Enables Video Cutscene playback."
+		],
 		// this one doesnt actually appear at the regular options menu
 		"Song Offset" => [
 			0,
@@ -112,7 +115,7 @@ class SaveData
 		saveFile.bind("options", "teles/MLC"); // use these for settings
 
 		progressionSave = new FlxSave();
-		progressionSave.bind("progression", "teles/MLC"); // use these for progressions´
+		progressionSave.bind("progression", "teles/MLC"); // use these for progressions
 
 		FlxG.save.bind("save-data", "teles/MLC"); // these are for other stuff
 		load();
@@ -123,6 +126,9 @@ class SaveData
 	
 	public static function load()
 	{
+		trace(saveFile.data.settings);
+		trace(progressionSave.data.progression);
+		trace(progressionSave.data.clowns);
 		if(saveFile.data.settings == null || Lambda.count(displaySettings) != Lambda.count(saveFile.data.settings))
 		{
 			for(key => values in displaySettings)
@@ -148,6 +154,10 @@ class SaveData
 		progression = progressionSave.data.progression;
 		clowns		= progressionSave.data.clowns; 
 		saveButTechnically();
+
+		trace(data);
+		trace(progression);
+		trace(clowns);
 	}
 	
 	public static function save()
@@ -196,7 +206,7 @@ class SaveData
 					"pete" => false,
 					"munchlog" => false
 				];
-				trace ("Wiping progress " + progressionSave.data.progression + ' ' + progressionSave.data.clowns);
+				//trace ("Wiping progress " + progressionSave.data.progression + ' ' + progressionSave.data.clowns);
 			case 'HIGHSCORE':
 				FlxG.save.erase();
 			case 'OPTIONS':

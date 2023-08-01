@@ -46,7 +46,7 @@ class Conductor
 		}
 		catch (e)
 		{
-			trace('Uncaught Error: $e');
+			//trace('Uncaught Error: $e');
 
 			var curBPM:Float = song.bpm;
 			var totalSteps:Int = 0;
@@ -69,7 +69,7 @@ class Conductor
 				totalPos += calcStep(curBPM) * deltaSteps;
 			}
 		}
-		trace("new BPM map BUDDY " + bpmChangeMap);
+		//trace("new BPM map BUDDY " + bpmChangeMap);
 	}
 
 	public static function calcBeat(bpm:Float):Float

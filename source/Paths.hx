@@ -9,7 +9,6 @@ import lime.utils.Assets;
 import openfl.display.BitmapData;
 import openfl.media.Sound;
 import sys.FileSystem;
-import sys.io.File;
 
 using StringTools;
 
@@ -39,14 +38,14 @@ class Paths
 				var bitmap = BitmapData.fromFile(path);
 				
 				var newGraphic = FlxGraphic.fromBitmapData(bitmap, false, key, false);
-				trace('created new image $key');
+				//trace('created new image $key');
 				
 				renderedGraphics.set(path, newGraphic);
 			}
 			
 			return renderedGraphics.get(path);
 		}
-		trace('$key doesnt exist, fuck');
+		//trace('$key doesnt exist, fuck');
 		return null;
 	}
 
@@ -57,7 +56,7 @@ class Paths
 		var clearCount:Int = 0;
 		for(key => graphic in renderedGraphics)
 		{
-			trace('cleared $key');
+			//trace('cleared $key');
 			clearCount++;
 			
 			if (openfl.Assets.cache.hasBitmapData(key))
@@ -68,7 +67,7 @@ class Paths
 			FlxG.bitmap.remove(graphic);
 			renderedGraphics.remove(key);
 		}
-		trace('cleared $clearCount assets');
+		//trace('cleared $clearCount assets');
 		
 		// sound clearing
 		for (key => sound in renderedSounds)

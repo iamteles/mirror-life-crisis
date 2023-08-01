@@ -3,14 +3,13 @@ package states;
 import data.GameData.MusicBeatState;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.addons.transition.FlxTransitionableState;
-import flixel.effects.FlxFlicker;
 import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxGradient;
 import openfl.display.BlendMode;
 import flixel.addons.display.FlxBackdrop;
+import states.menus.*;
 
 /**
 	a state for general warnings

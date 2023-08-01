@@ -60,7 +60,7 @@ class SongData
 	}
 
 	inline static public function songJson(song:String, string:String) {
-		trace('load ' + 'assets/songs/${song}/${song}${string}.json');
+		//trace('load ' + 'assets/songs/${song}/${song}${string}.json');
 		return 'assets/songs/${song}/${song}${string}.json';
 	}
 
@@ -71,7 +71,7 @@ class SongData
 		if (diff == 'MANIA')
 			string = '-mania';
 
-		trace ('diff is ' + string);
+		//trace ('diff is ' + string);
 		var rawJson = File.getContent(songJson(jsonInput, string)).trim();
 
 		while (!rawJson.endsWith("}"))

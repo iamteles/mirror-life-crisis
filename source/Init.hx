@@ -1,7 +1,6 @@
 package;
 
 import flixel.FlxG;
-import flixel.FlxSprite;
 import flixel.graphics.FlxGraphic;
 import data.GameData.MusicBeatState;
 import states.SplashState;

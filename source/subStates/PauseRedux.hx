@@ -1,19 +1,15 @@
 package subStates;
 
-import sys.db.Sqlite;
 import flixel.FlxG;
 import flixel.FlxBasic;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
-import flixel.text.FlxText;
-import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
-import flixel.system.FlxSound;
-import data.Conductor;
 import data.GameData.MusicBeatSubState;
 import gameObjects.menu.AlphabetMenu;
 import states.*;
+import states.menus.*;
 
 class PauseRedux extends MusicBeatSubState
 {

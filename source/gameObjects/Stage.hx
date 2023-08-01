@@ -53,7 +53,7 @@ class Stage extends FlxGroup
 
 	public function reloadStageFromSong(song:String = "test"):Void
 	{
-		trace('Attempt to load' + 'assets/data/stage/' + song + '.json');
+		//trace('Attempt to load' + 'assets/data/stage/' + song + '.json');
 		try
 		{
 			
@@ -63,7 +63,7 @@ class Stage extends FlxGroup
 		}
 		catch (e)
 		{
-			trace('Uncaught Error: $e');
+			//trace('Uncaught Error: $e');
 
 			switch(song.toLowerCase())
 			{
@@ -74,7 +74,7 @@ class Stage extends FlxGroup
 	}
 
 	function loadFromJson() {
-		trace('Finish load.');
+		//trace('Finish load.');
 
 		if(stageData.zoom != null) 
 			PlayState.defaultCamZoom = stageData.zoom;
@@ -96,7 +96,7 @@ class Stage extends FlxGroup
 				{
 					newSpr.setGraphicSize(Std.int(newSpr.width * object.scale));
 					newSpr.updateHitbox();
-					trace('Scaled.');
+					//trace('Scaled.');
 				}
 
 				if (object.alpha != null)
@@ -128,7 +128,7 @@ class Stage extends FlxGroup
 				{
 					newSpr.setGraphicSize(Std.int(newSpr.width * object.scale));
 					newSpr.updateHitbox();
-					trace('Scaled.');
+					//trace('Scaled.');
 				}
 
 				if (object.alpha != null)

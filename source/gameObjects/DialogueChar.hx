@@ -4,8 +4,6 @@ import flixel.FlxBasic;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxPoint;
-import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
 import sys.io.File;
 
@@ -49,14 +47,14 @@ class DialogueChar extends FlxTypedGroup<FlxBasic>
 
 	public function loadJson()
 	{
-		trace('Attempt load.');
+		//trace('Attempt load.');
 		try
 		{
 			charData = haxe.Json.parse(File.getContent('assets/data/logchars/' + char + '.json').trim());
 		}
 		catch (e)
 		{
-			trace('Uncaught Error: $e');
+			//trace('Uncaught Error: $e');
 
 			/*
 			lvlData = haxe.Json.parse('{
@@ -66,7 +64,7 @@ class DialogueChar extends FlxTypedGroup<FlxBasic>
 			*/
 		}
 
-		trace('Finish load.');
+		//trace('Finish load.');
 
 		name = charData.name;
 
