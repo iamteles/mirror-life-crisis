@@ -2,7 +2,7 @@
 
 # FNF: Mirror Life Crisis
 ### Made for the FNF OC Mod Jam
-### Using [Doido Engine v3]([https://haxe.org/download/version/4.2.5/](https://github.com/DiogoTVV/FNF-Doido-Engine-3))
+### Using [Doido Engine v3](https://github.com/DiogoTVV/FNF-Doido-Engine-3)
 Note that this mod uses a VERY old indev version of the engine. Regardless, build instructions should be the same
 # Features
  - 3 Songs
